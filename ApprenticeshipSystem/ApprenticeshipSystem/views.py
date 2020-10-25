@@ -7,6 +7,7 @@ from .forms import LoginFrom, RegForm
 def home(request):
     return render(request, 'index.html', {})
 
+
 def login(request):
     if request.method == 'POST':
         login_form = LoginFrom(request.POST)

@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}奇怪的拜师系统{% endblock %}
 
-</body>
-</html>
+{% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}">
+        <button type="button" class="btn btn-primary">
+            主页
+        </button>
+    </a>
+    <a href="{% url 'login' %}">
+        <button type="button" class="btn btn-secondary">
+            登录
+        </button>
+    </a>
+    <a href="{% url 'register' %}">
+        <button type="button" class="btn btn-success">
+            注册
+        </button>
+    </a>
+    <a href="{% url 'teacher_list' %}">
+        <button type="button" class="btn btn-success">
+            找师傅
+        </button>
+    </a>
+{% endblock content %}
