@@ -34,7 +34,7 @@ class Sex(models.Model):
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=10)
     teacher_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
-    school = models.CharField(max_length=10)
+
     enter_time = models.DateTimeField()
     grade = models.CharField(max_length=5)
     major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)

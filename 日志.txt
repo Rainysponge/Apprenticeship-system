@@ -7,3 +7,7 @@ pip install django-simpleui -i https://pypi.tuna.tsinghua.edu.cn/simple
 在static里面可以找到一个层叠样式文件夹，将里面的bootstrap.css与css/bootstrap.css替换，并将base.html里的bootstrap.min.css改为bootstrap.css即可使用改样式，其具体效果请见bootswatch.com。
 author:小山猪
 
+
+20_10_29
+解决了昨天遗留的runserver会报出“UserAdmin does not have attritate 'urls'”的问题，现在可以使用PROFILE类了
+auth：小山猪

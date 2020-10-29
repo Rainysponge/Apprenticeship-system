@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import RegForm, LoginFrom
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 # Create your views here.
@@ -13,6 +14,7 @@ def register(request):
             username = reg_form.cleaned_data['username']
             email = reg_form.cleaned_data['email']
             password = reg_form.cleaned_data['password']
+            # school = reg_form.changed_data['school']
             user = User.objects.create_user(username, email, password)  # 创建用户
             user.save()
 

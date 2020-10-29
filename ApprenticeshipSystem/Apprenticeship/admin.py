@@ -11,7 +11,7 @@ class BlogTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('id', 'teacher_name', 'teacher_sex', 'school', 'enter_time', 'grade', 'skill', 'self_introduction')
+    list_display = ('id', 'teacher_name', 'teacher_sex',  'enter_time', 'grade', 'skill', 'self_introduction')
 
 
 @admin.register(Relationship)

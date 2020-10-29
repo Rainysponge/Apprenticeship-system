@@ -11,6 +11,7 @@ class LoginFrom(forms.Form):
                                widget=forms.PasswordInput(
                                    attrs={'class': 'form-control', 'placeholder': '请输入密码'}))
 
+
     def clean(self):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
@@ -29,6 +30,9 @@ class RegForm(forms.Form):
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入3至30位用户名'}))
     email = forms.EmailField(label='邮箱',
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '请输入邮箱'}))
+    # school = forms.CharField(label='学校',
+    #                          widget=forms.TextInput(
+    #                              attrs={'class': 'form-control', 'placeholder': '请输入学校'}))
     password = forms.CharField(label='密码',
                                min_length=6,
                                widget=forms.PasswordInput(
@@ -56,3 +60,4 @@ class RegForm(forms.Form):
         if password != password_again:
             raise forms.ValidationError("两次密码不一致")
         return password_again
+

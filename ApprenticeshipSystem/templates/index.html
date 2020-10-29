@@ -4,6 +4,9 @@
 {% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
 
 {% block content %}
+    <p>{{ user.get_nickname }}</p>
+    <p>{{ user.get_school }}</p>
+
     <a href="{% url 'home' %}">
         <button type="button" class="btn btn-primary">
             主页
