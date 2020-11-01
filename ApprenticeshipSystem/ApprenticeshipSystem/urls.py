@@ -27,3 +27,6 @@ urlpatterns = [
     path('user/', include('user.urls')),
 
 ]
+
+
+urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)

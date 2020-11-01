@@ -30,9 +30,11 @@ class RegForm(forms.Form):
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入3至30位用户名'}))
     email = forms.EmailField(label='邮箱',
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '请输入邮箱'}))
-    # school = forms.CharField(label='学校',
-    #                          widget=forms.TextInput(
-    #                              attrs={'class': 'form-control', 'placeholder': '请输入学校'}))
+    SEX = [
+        ['男', '男'],
+        ['女', '女']
+    ]
+    sex = forms.ChoiceField(label='性别', choices=SEX)
     password = forms.CharField(label='密码',
                                min_length=6,
                                widget=forms.PasswordInput(

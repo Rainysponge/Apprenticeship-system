@@ -38,22 +38,22 @@ class Teacher(models.Model):
 
     enter_time = models.DateTimeField()
     grade = models.CharField(max_length=5)
-    #major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)
+    # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)
     skill = models.CharField(max_length=50)
     self_introduction = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.teacher_name
+        return self.teacher_No
 
 
 class Student(models.Model):
     student_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
     student_name = models.CharField(max_length=10)
-    #student_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
+    # student_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
     school = models.CharField(max_length=10)
     enter_time = models.DateTimeField()
     grade = models.CharField(max_length=5)
-    #major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
+    # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
     help = models.CharField(max_length=50)
     self_introduction = models.CharField(max_length=50)
 

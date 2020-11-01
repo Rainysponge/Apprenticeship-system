@@ -20,7 +20,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='昵称')
     nickname = models.CharField(max_length=20)
     school = models.CharField(max_length=10, default='华东理工大学')
-    sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING, null=True)
+    sex = models.CharField(max_length=2, null=True)
     major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):

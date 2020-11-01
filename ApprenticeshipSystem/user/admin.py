@@ -19,7 +19,7 @@ class UserAdmin(BaseUserAdmin):
     def school(self, obj):
         return obj.profile.school
 
-    nickname.short_description = '昵称'    #后台将nickname显示成“昵称”
+    nickname.short_description = '昵称'  # 后台将nickname显示成“昵称”
 
 
 # Re-register UserAdmin
@@ -29,14 +29,14 @@ admin.site.register(User, UserAdmin)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'nickname', 'sex', 'major')    #放在User中还是这里？无所谓的吧 后面加个major
+    list_display = ('user', 'nickname', 'sex', 'major')
 
 
 @admin.register(Major)
-class BlogAdmin(admin.ModelAdmin):
+class MajorAdmin(admin.ModelAdmin):
     list_display = ('id', 'major')
 
 
 @admin.register(Sex)
-class BlogAdmin(admin.ModelAdmin):
+class SexAdmin(admin.ModelAdmin):
     list_display = ('id', 'sex')

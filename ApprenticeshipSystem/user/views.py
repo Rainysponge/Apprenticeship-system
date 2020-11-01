@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .forms import RegForm, LoginFrom
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
-
+from .forms import RegForm, LoginFrom
 
 # Create your views here.
 
@@ -48,3 +48,26 @@ def login(request):
     context['form_title'] = '登录'
     return render(request, 'user/login.html', context)
 
+
+# 这里想实现一个首页浮窗登录
+# def loginTohome(request):
+#     if request.method == 'POST':
+#         login_form = LoginFrom(request.POST)
+#         if login_form.is_valid():
+#             user = login_form.cleaned_data['user']
+#             auth.login(request, user)
+#             # return redirect(request.GET.get('from', reverse('home')))
+#             return render(request, 'index.html', {})
+#     else:
+#         login_form = LoginFrom()
+#
+#     context = {}
+#     # context['page_title'] = '欢迎'
+#     context['login_form'] = login_form
+#     context['form_title'] = '登录'
+#     return render(request, 'index.html', context)
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(request.GET.get('from', reverse('home')))
