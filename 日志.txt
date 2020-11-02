@@ -5,12 +5,12 @@ pip install django-simpleui -i https://pypi.tuna.tsinghua.edu.cn/simple
 加入了userApp,将登录注册放在了该app中，建立了profile类，添加了昵称属性。
 这是一次测试。
 在static里面可以找到一个层叠样式文件夹，将里面的bootstrap.css与css/bootstrap.css替换，并将base.html里的bootstrap.min.css改为bootstrap.css即可使用改样式，其具体效果请见bootswatch.com。
-author:小山猪
+author:胡展翊
 
 
 20_10_29
 解决了昨天遗留的runserver会报出“UserAdmin does not have attritate 'urls'”的问题，现在可以使用PROFILE类了
-auth：小山猪
+auth：胡展翊
 
 20_11_01
 美化了主页页面，登录注册页面仍需美化，感觉背景过于空旷了。
@@ -23,3 +23,8 @@ auth：小山猪
 20_11_02
 初步完成了选课界面 ，但还需美化。
 auth:徐一博
+
+完成了teacher_info页面，本来像直接通过base里的导航条的个人中心链接到该页面，但是teacher类的PK和user并没有直接联系，所以现在打算做两套页面一套面向学生，一套面向老师，该部分在制作过程中出现了一些数据库的问题，所以有待商榷。
+更新了settings，现在可以使用富文本了，这里有个问题如果之前不可用，那引入的时候更新数据库为什么不会出错，还是根本就没有用到，做了一个假的import？
+大致设想了teacher_list的做法，和博客list应该类似。需要将comment连接到teacher_info中。
+auth：胡展翊

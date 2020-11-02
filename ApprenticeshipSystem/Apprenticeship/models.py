@@ -34,13 +34,13 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=10, null=True)
-    teacher_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
+    teacher = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
 
     enter_time = models.DateTimeField()
     grade = models.CharField(max_length=5)
     # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)
     skill = models.CharField(max_length=50)
-    self_introduction = models.CharField(max_length=50)
+    self_introduction = RichTextUploadingField()
 
     def __str__(self):
         return self.teacher_name
@@ -55,7 +55,7 @@ class Student(models.Model):
     grade = models.CharField(max_length=5)
     # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
     help = models.CharField(max_length=50)
-    self_introduction = models.CharField(max_length=50)
+    self_introduction = RichTextUploadingField()
 
     def __str__(self):
         return self.student_name

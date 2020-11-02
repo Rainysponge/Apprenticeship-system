@@ -6,11 +6,11 @@ class Major(models.Model):
     major = models.CharField(max_length=10)
 
     def __str__(self):
-        return 'self.major'
+        return self.major
 
 
 class Sex(models.Model):
-    sex = models.CharField(max_length=1)  # 怎么限制男女？？？
+    sex = models.CharField(max_length=1)
 
     def __str__(self):
         return self.sex
