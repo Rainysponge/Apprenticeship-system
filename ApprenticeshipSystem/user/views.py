@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
 from .forms import RegForm, LoginFrom
+from Apprenticeship.models import Homework
 
 # Create your views here.
 
@@ -71,3 +72,13 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect(request.GET.get('from', reverse('home')))
+
+
+def homework(request):
+    homework = get_object_or_404(Homework, pk=1)
+
+
+    context = {}
+    context['user'] = request.user
+    context['homework'] = homework
+    return render(request, 'user/homework.html', context)

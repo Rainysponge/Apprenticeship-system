@@ -33,7 +33,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Teacher(models.Model):
-    # teacher_name = models.CharField(max_length=10)
+    teacher_name = models.CharField(max_length=10, null=True)
     teacher_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
 
     enter_time = models.DateTimeField()
@@ -43,7 +43,7 @@ class Teacher(models.Model):
     self_introduction = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.teacher_No
+        return self.teacher_name
 
 
 class Student(models.Model):
@@ -67,7 +67,7 @@ class Relationship(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.id
+        return '<Profile: %s for %s>' % (self.SID, self.TID)
 
 
 class Homework(models.Model):

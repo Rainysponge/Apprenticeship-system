@@ -63,7 +63,7 @@ footer{
                 <a class="nav-link" href="#">Action1<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Action2<span class="sr-only">(current)</span></a>
+                <a class="nav-link {% block homeworkActive %}{% endblock %}" href="{% url 'homework' %}">作业提交<span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item dropdown">
