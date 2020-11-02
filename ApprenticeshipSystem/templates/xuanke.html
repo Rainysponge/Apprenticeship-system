@@ -1,0 +1,187 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.5.0-dist/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-4.5.0-dist/js/bootstrap.min.js' %}"></script>
+
+</head>
+<body>
+ <div class="container-xl">
+    <nav class="navbar navbar-expand navbar-light bg-light fixed-top" >
+                <a class="navbar-brand mb-0 h1" href="...">教育平台</a>
+                <button class="navbar-toggler "  type = "button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="...">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="...">选课中心</a>
+                    </li>
+                 <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                         aria-haspopup="true"  aria-expanded="false" >个人信息</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a href="#" class="dropdown-item">Action</a>
+                    <a href="#" class="dropdown-item">Action2</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">something else</a>
+                </div>
+                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </ul>
+                <form  class="form-inline my-2 my-lg-0">
+                    <input type="search" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+    </nav>
+ </div>
+ <div class="row">
+ <div class="col-sm-1"></div>
+ <div class="col-sm-3">
+<div class="card" style="width: 18rem;">
+
+     <div class="class card-header">
+         header
+     </div>
+     <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="card-title">周文孝</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+  <ul class="list-group list">
+    <li class="list-group-item">
+        <a href="#" class="card-link"> Cras justo odio</a></li>
+    <li class="list-group-item">
+        <a href="#" class="card-link">Dapibus ac facilisis in</a></li>
+    <li class="list-group-item">
+        <a href="#" class="card-link">Vestibulum at eros</a></li>
+  </ul>
+
+</div>
+ </div>
+     <div class="col-sm-8">
+         <ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">全部课程</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">已选课程</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">已学课程</a>
+  </li>
+
+</ul>
+          <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+         <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+          </div>
+  </div>
+          <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8 ">
+        <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        </div>
+    </div>
+  </div>
+          <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8 ">
+        <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        </div>
+    </div>
+  </div>
+
+         <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8 ">
+        <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        </div>
+    </div>
+  </div>
+         <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8 ">
+        <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        </div>
+    </div>
+  </div>
+
+         <div class="row no-gutters mb-3">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8 ">
+        <div class="card bg-light" >
+      <div class="card-body">
+        <h5 class="card-title">姓名</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+        </div>
+    </div>
+  </div>
+     </div>
+ </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+</body>
+</html>
