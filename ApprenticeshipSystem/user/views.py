@@ -7,7 +7,7 @@ from .models import Profile, Teacher, Student
 from .forms import RegForm, LoginFrom
 from Apprenticeship.models import Homework
 from comment.models import Comment
-
+from comment.forms import CommentForm
 
 # Create your views here.
 
@@ -80,8 +80,13 @@ def homework(request):
     context = {}
     context['user'] = request.user
     context['comments'] = comments
+
+    data = {}   #用于初始
+    data['homework_id'] = homework1.id
+    context['comment_form'] = CommentForm(initial=data)
     context['homework'] = homework1
     return render(request, 'user/homework.html', context)
+
 
 
 def teacher_list(request):

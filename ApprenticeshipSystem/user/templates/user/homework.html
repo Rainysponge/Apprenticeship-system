@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}作业提交{% endblock %}
+
+{% block header_extends %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
+
 {% block homeworkActive %}active{% endblock %}
 {% block content %}
         <div class="container">
@@ -17,14 +24,10 @@
                         <h3 class="comment-area-title">提交评论</h3>
                         {# user.is_authenticated  admin中已登录返回true否则返回false #}
                         {% if user.is_authenticated %}
-                            <form action="{% url 'update_comment' %}" method="Post" style="overflow:hidden1">
+                            <form action="{% url 'update_comment' %}" method="POST" style="overflow:hidden">
+                                <label>{{user.name}}欢迎评论</label>
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="comment_text">{{user.name}}欢迎评论</label>
-                                    <textarea id="comment_text" class="form-control" name="text" rows="4"></textarea>
-                                </div>
-
-                                <input type="hidden" name="homework_id" value="{{ homework.pk }}">
+                                {{ comment_form }}
                                 <input type="submit" value="评论" class="btn btn-primary" style="float:right">
                             </form>
                         {% else %}

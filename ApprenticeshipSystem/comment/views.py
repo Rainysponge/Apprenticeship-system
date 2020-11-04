@@ -1,33 +1,38 @@
 #23课28：56
 #23课8:20 HTTP_REFERER获取当前页面信息 reverse解析urls中home的路径，这里使用为啥是跳到当前页面？
+from django import forms
 from django.shortcuts import render, redirect
 from .models import Comment
 from Apprenticeship.models import Homework
 from django.urls import reverse
+from comment.forms import CommentForm
 # Create your views here.
 
 
 def update_comment(request):
-    user = request.user
+    comment_form = CommentForm(request.POST)
+    #user = request.user
     #与前端交互
-    text = request.POST.get('text', '')
-    if text == '':
-        #return render(request, 'error.html', {'message：评论内容为空'})
-        pass
-    try:
-        object_id = int(request.POST.get('homework_id', ''))
-    except Exceptionas as e:
-        # return render(request, 'error.html', {'message：评论对象不存在'})
-        pass
+    #text = request.POST.get('text', '')
+    # if text == '':
+    #     #return render(request, 'error.html', {'message：评论内容为空'})
+    # try:
+    #     object_id = int(request.POST.get('homework_id', ''))
+    # except Exceptionas as e:
+    #     # return render(request, 'error.html', {'message：评论对象不存在'})
     #object_id = int(request.POST.get('homework_id', ''))
 
-    comment = Comment()
-    comment.user = user
-    comment.text = text
-    comment.content_object = Homework.objects.get(pk=object_id)
-    comment.save()
+
+    #cleaned_data 用于is_valid()后 判断django是否得到了干净的数据
+    if comment_form.is_valid():
+        comment = Comment()
+        comment.user = request.user
+        # comment.text = text
+        # comment.content_object = Homework.objects.get(pk=object_id)
+        comment.text = comment_form.cleaned_data['text']
+        comment.content_object = Homework.objects.get(pk=comment_form.cleaned_data['homework_id'])
+        comment.save()
 
     referer = request.META.get('HTTP_REFERER', reverse('home'))
     return redirect(referer)
-   # return render(request, 'user/homework.html')
 
