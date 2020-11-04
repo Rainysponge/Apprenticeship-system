@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}可爱的师傅们{% endblock %}
+
+{% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
+
+{% block content %}
+    <br>
+<div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>师傅名</th>
+
+            </tr>
+          </thead>
+          <tbody>
+		  {% for teacher in teacher_list %}
+            <tr>
+              <td>{{ teacher.pk }}</td>
+              <td><a href="{% url 'teacher_info' teacher.pk %}">{{ movie.name }}</a></td>
+
+            </tr>
+			{% empty %}
+				<h3>---暂无信息---</h3>
+			{% endfor %}
+          </tbody>
+        </table>
+      </div>
+{% endblock %}

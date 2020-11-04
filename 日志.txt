@@ -22,8 +22,15 @@ auth:徐一博
 大致设想了teacher_list的做法，和博客list应该类似。需要将comment连接到teacher_info中。
 auth：胡展翊
 
-20_11_2前面上传的将teacher和Student model移动到了user内；更改了user app下的homework.html，更改了Comment模型，更改了user.views.py的homework函数，数据库中添加了老师和学生的数据用作验证。
+20_11_2
+前面上传的将teacher和Student model移动到了user内；更改了user app下的homework.html，更改了Comment模型，更改了user.views.py的homework函数，数据库中添加了老师和学生的数据用作验证。
 auth：吴一楠
 
-20_11_4完成了评论功能，现在添加评论后页面不会跳转，并在页面上显示评论的内容 
+更改了Teacher类，将Teacher设为和User一对一的类，而不是使用外键，虽然在属性的管理和区分上面还有待考证，但是能初步实现拓展用户的注册功能。更改了user/forms.py里面的regform类和user/view.py里面的reg方法，现在在注册的时候已经可以自动生成该User对应的Profile和Teacher了，并在前端可以有所展示。
+接下来学生个人页面与老师个人类似，但是还需要做一个老师对外页面，到制作支付模块时，可能还需要重构数据库（应该加字段就可以了）。
+auth:胡展翊
+
+
+20_11_4
+完成了评论功能，现在添加评论后页面不会跳转，并在页面上显示评论的内容 
 auth：吴一楠
