@@ -1,11 +1,4 @@
-20_10_28
-更新了admin后台，需要在cmd或者anaconda中运行命令：
-pip install django-simpleui -i https://pypi.tuna.tsinghua.edu.cn/simple
-
-加入了userApp,将登录注册放在了该app中，建立了profile类，添加了昵称属性。
-这是一次测试。
-在static里面可以找到一个层叠样式文件夹，将里面的bootstrap.css与css/bootstrap.css替换，并将base.html里的bootstrap.min.css改为bootstrap.css即可使用改样式，其具体效果请见bootswatch.com。
-author:胡展翊
+﻿author:胡展翊
 
 
 20_10_29
@@ -28,3 +21,9 @@ auth:徐一博
 更新了settings，现在可以使用富文本了，这里有个问题如果之前不可用，那引入的时候更新数据库为什么不会出错，还是根本就没有用到，做了一个假的import？
 大致设想了teacher_list的做法，和博客list应该类似。需要将comment连接到teacher_info中。
 auth：胡展翊
+
+20_11_2前面上传的将teacher和Student model移动到了user内；更改了user app下的homework.html，更改了Comment模型，更改了user.views.py的homework函数，数据库中添加了老师和学生的数据用作验证。
+auth：吴一楠
+
+20_11_4完成了评论功能，现在添加评论后页面不会跳转，并在页面上显示评论的内容 
+auth：吴一楠

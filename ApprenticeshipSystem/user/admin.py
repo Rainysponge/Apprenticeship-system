@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from .models import Profile, Sex, Major
+from .models import Profile, Sex, Major, Student, Teacher
 
 
 class ProfileInline(admin.StackedInline):
@@ -30,6 +30,16 @@ admin.site.register(User, UserAdmin)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'nickname', 'sex', 'major')
+
+
+@admin.register(Student)
+class BlogTypeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'enter_time', 'grade', 'help', 'self_introduction')
+
+
+@admin.register(Teacher)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('id', 'enter_time', 'grade', 'skill', 'self_introduction')
 
 
 @admin.register(Major)

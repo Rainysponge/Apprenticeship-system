@@ -4,14 +4,14 @@ from .models import *
 
 # Register your models here.
 
-@admin.register(Student)
-class BlogTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'enter_time', 'grade', 'help', 'self_introduction')
-
-
-@admin.register(Teacher)
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ('id', 'enter_time', 'grade', 'skill', 'self_introduction')
+# @admin.register(Student)
+# class BlogTypeAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'enter_time', 'grade', 'help', 'self_introduction')
+#
+#
+# @admin.register(Teacher)
+# class BlogAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'enter_time', 'grade', 'skill', 'self_introduction')
 
 
 @admin.register(Relationship)

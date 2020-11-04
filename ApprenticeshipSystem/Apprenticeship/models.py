@@ -1,7 +1,8 @@
 from django.db import models
+from user.models import Teacher, Student
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
-from user.models import Profile, Teacher
+
 
 # Create your models here.
 
@@ -43,21 +44,21 @@ from user.models import Profile, Teacher
 #
 #     def __str__(self):
 #         return self.teacher_name
-
-
-class Student(models.Model):
-    student_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
-    student_name = models.CharField(max_length=10)
-    # student_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
-    school = models.CharField(max_length=10)
-    enter_time = models.DateTimeField()
-    grade = models.CharField(max_length=5)
-    # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
-    help = models.CharField(max_length=50)
-    self_introduction = RichTextUploadingField()
-
-    def __str__(self):
-        return self.student_name
+#
+#
+# class Student(models.Model):
+#     student_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
+#     student_name = models.CharField(max_length=10)
+#     # student_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
+#     school = models.CharField(max_length=10)
+#     enter_time = models.DateTimeField()
+#     grade = models.CharField(max_length=5)
+#     # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
+#     help = models.CharField(max_length=50)
+#     self_introduction = RichTextUploadingField()
+#
+#     def __str__(self):
+#         return self.student_name
 
 
 class Relationship(models.Model):

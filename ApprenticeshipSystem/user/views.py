@@ -1,11 +1,12 @@
+#homework_pk报错 还有homework.html找不到url 'update_comment'
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
-from .models import Profile, Teacher
+from .models import Profile
 from .forms import RegForm, LoginFrom
 from Apprenticeship.models import Homework
-
+from comment.models import Comment
 
 # Create your views here.
 
@@ -18,22 +19,12 @@ def register(request):
             password = reg_form.cleaned_data['password']
             # school = reg_form.changed_data['school']
             user = User.objects.create_user(username, email, password)  # 创建用户
-
-            sex = reg_form.cleaned_data['sex']
             user.save()
-            nickname = reg_form.cleaned_data['nickname']
-            # 这个地方就是有病
-            profile = Profile.objects.create(user=user, sex=sex, nickname=nickname)
-            profile.save()
-            grade = reg_form.cleaned_data['grade']
-            teacher = Teacher.objects.create(user=user, grade=grade)
 
-            teacher.save()
-
-            # user = auth.authenticate(username=username, password=password)
-            # auth.login(request, user)
+            user = auth.authenticate(username=username, password=password)
+            auth.login(request, user)
             # return redirect(request.GET.get('from', reverse('home')))
-            return render(request, 'index.html', {'massge':'恭喜你已经成功注册啦，赶紧登录试试吧！'})
+            return render(request, 'index.html', {})
     else:
         reg_form = RegForm()
 
@@ -85,27 +76,14 @@ def logout(request):
     return redirect(request.GET.get('from', reverse('home')))
 
 
+#def homework(request, homework_pk):
 def homework(request):
     homework = get_object_or_404(Homework, pk=1)
+    #comments = Comment.objects.filter(pk=1)
+    comments = Comment.objects.all()
 
     context = {}
     context['user'] = request.user
+    context['comments'] = comments
     context['homework'] = homework
     return render(request, 'user/homework.html', context)
-
-
-def teacher_list(request):
-    # tlist = Teacher.objects.get()
-
-    context = {}
-    # context['teacher_list'] = tlist
-
-    return render(request, 'Apprenticeship/teacher_list.html', context)
-
-
-def teacher_info(request, teacher_pk):
-    teacher = get_object_or_404(Teacher, pk=teacher_pk)
-
-    context = {}
-    context['teacher'] = teacher
-    return render(request, 'user/teacher_info.html', context)
