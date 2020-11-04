@@ -4,10 +4,11 @@ from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile, Teacher, Student
-from .forms import RegForm, LoginFrom
+from .forms import RegForm, LoginFrom, changeProfileInfoForm
 from Apprenticeship.models import Homework
 from comment.models import Comment
 from comment.forms import CommentForm
+
 
 # Create your views here.
 
@@ -20,13 +21,16 @@ def register(request):
             password = reg_form.cleaned_data['password']
             # school = reg_form.changed_data['school']
             user = User.objects.create_user(username, email, password)  # 创建用户
-
+            real_name = reg_form.cleaned_data['real_name']
             sex = reg_form.cleaned_data['sex']
-            user.save()
+
             nickname = reg_form.cleaned_data['nickname']
             # 这个地方就是有病
             grade = reg_form.cleaned_data['grade']
-            profile = Profile.objects.create(user=user, sex=sex, nickname=nickname, grade=grade)
+            student_ID = reg_form.cleaned_data['student_ID']
+            user.save()
+            profile = Profile.objects.create(user=user, sex=sex, nickname=nickname,
+                                             grade=grade, student_ID=student_ID, real_name=real_name)
             profile.save()
 
             teacher = Teacher.objects.create(user=user, teacher_name=nickname)
@@ -64,14 +68,11 @@ def login(request):
     return render(request, 'user/login.html', context)
 
 
-
-
 def logout(request):
     auth.logout(request)
     return redirect(request.GET.get('from', reverse('home')))
 
 
-# def homework(request, homework_pk):
 def homework(request):
     homework1 = get_object_or_404(Homework, pk=1)
     # comments = Comment.objects.filter(pk=1)
@@ -81,12 +82,11 @@ def homework(request):
     context['user'] = request.user
     context['comments'] = comments
 
-    data = {}   #用于初始
+    data = {}  # 用于初始
     data['homework_id'] = homework1.id
     context['comment_form'] = CommentForm(initial=data)
     context['homework'] = homework1
     return render(request, 'user/homework.html', context)
-
 
 
 def teacher_list(request):
@@ -104,3 +104,26 @@ def teacher_info(request, teacher_pk):
     context = {}
     context['teacher'] = teacher
     return render(request, 'user/teacher_info.html', context)
+
+
+def changeProfileInfo(request, profile_pk):
+    if request.method == 'POST':
+        change_form = changeProfileInfoForm(request.POST)
+        if change_form.is_valid():
+            profile = Profile.objects.filter(pk=profile_pk)
+            profile.grade = change_form.cleaned_data['grade']
+            profile.school = change_form.cleaned_data['school']
+
+            profile.save()
+            # profile = Profile.objects.create(user=user, sex=sex, nickname=nickname,
+            #                                  grade=grade, student_ID=student_ID, real_name=real_name)
+            # profile.save()
+
+            return render(request, 'index.html', {'massge': '基础信息已经更改'})
+    else:
+        change_form = changeProfileInfoForm()
+
+    context = {}
+    context['change_form'] = change_form
+    context['form_title'] = '更改基础信息'
+    return render(request, 'user/changeProfileInfo.html', context)

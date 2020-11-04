@@ -19,6 +19,8 @@ class Sex(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    student_ID = models.CharField(max_length=8, null=True, verbose_name="学号")
+    real_name = models.CharField(max_length=10, null=True, verbose_name="真实姓名")
     nickname = models.CharField(max_length=20, verbose_name='昵称')
     school = models.CharField(max_length=10, default='华东理工大学')
     sex = models.CharField(max_length=2, null=True)
@@ -32,11 +34,6 @@ class Profile(models.Model):
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     teacher_name = models.CharField(max_length=10, null=True)
-    # teacher_Profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
-
-    # grade = models.CharField(max_length=5, null=True)
-
-    # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)
     skill = models.CharField(max_length=50, null=True)
     enter_time = models.DateTimeField(null=True, blank=True)
     self_introduction = RichTextUploadingField(null=True)

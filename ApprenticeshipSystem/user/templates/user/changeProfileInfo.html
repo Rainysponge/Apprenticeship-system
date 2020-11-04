@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ form_title }}{% endblock %}
+{% block content %}
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
+            <p>{{ user.Profile.nickname }}</p>
+                <form action="{% url 'changeProfileInfo' user.Profile.pk %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in change_form %}
+                        <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
+                        {{ field }}
+                        <p class="text-danger">{{ field.errors.as_text }}</p>
+                    {% endfor %}
+                    <span class="pull-left text-danger">{{ change_form.non_field_errors }}</span>
+                    <button type="submit" class="btn btn-info">修改</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

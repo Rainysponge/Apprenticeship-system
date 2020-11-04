@@ -30,7 +30,13 @@ class RegForm(forms.Form):
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入3至30位用户名'}))
     nickname = forms.CharField(label='昵称',
                                max_length=30, min_length=2,
-                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'MASK'}))
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不可更改哦'}))
+    real_name = forms.CharField(label='真实姓名',
+                                max_length=30, min_length=2,
+                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不可更改哦'}))
+    student_ID = forms.CharField(label='学号',
+                                 max_length=8, min_length=2,
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '填本人的哦'}))
     email = forms.EmailField(label='邮箱',
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '请输入邮箱'}))
     SEX = [
@@ -53,6 +59,12 @@ class RegForm(forms.Form):
                                      min_length=6,
                                      widget=forms.PasswordInput(
                                          attrs={'class': 'form-control', 'placeholder': '请再次输入密码'}))
+
+    def clean_student_ID(self):
+        student_ID = self.cleaned_data['student_ID']
+        if Profile.objects.filter(student_ID=student_ID).exists():
+            raise forms.ValidationError("该学号已经被使用了")
+        return student_ID
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -88,7 +100,16 @@ class RegForm(forms.Form):
         return password_again
 
 
-# class changeTeacherInfoForm(forms.Form):
-#     pass
+class changeProfileInfoForm(forms.Form):
 
 
+    GRADE = [
+        ['大一', '大一'],
+        ['大二', '大二'],
+        ['大三', '大三'],
+        ['大四', '大四']
+    ]
+    grade = forms.ChoiceField(label='年级', choices=GRADE)
+    school = forms.CharField(label='学校',
+                             max_length=30, min_length=2,
+                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))
