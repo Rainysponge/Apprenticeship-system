@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 class LoginFrom(forms.Form):
@@ -10,7 +11,6 @@ class LoginFrom(forms.Form):
     password = forms.CharField(label='密码',
                                widget=forms.PasswordInput(
                                    attrs={'class': 'form-control', 'placeholder': '请输入密码'}))
-
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -28,6 +28,9 @@ class RegForm(forms.Form):
     username = forms.CharField(label='用户名',
                                max_length=30, min_length=2,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '请输入3至30位用户名'}))
+    nickname = forms.CharField(label='昵称',
+                               max_length=30, min_length=2,
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'MASK'}))
     email = forms.EmailField(label='邮箱',
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '请输入邮箱'}))
     SEX = [
@@ -35,6 +38,13 @@ class RegForm(forms.Form):
         ['女', '女']
     ]
     sex = forms.ChoiceField(label='性别', choices=SEX)
+    GRADE = [
+        ['大一', '大一'],
+        ['大二', '大二'],
+        ['大三', '大三'],
+        ['大四', '大四']
+    ]
+    grade = forms.ChoiceField(label='年级', choices=GRADE)
     password = forms.CharField(label='密码',
                                min_length=6,
                                widget=forms.PasswordInput(
@@ -50,6 +60,20 @@ class RegForm(forms.Form):
             raise forms.ValidationError("用户名已存在")
         return username
 
+    def clean_sex(self):
+        sex = self.cleaned_data['sex']
+        return sex
+
+    def clean_grade(self):
+        grade = self.cleaned_data['grade']
+        return grade
+
+    def clean_nickname(self):
+        nickname = self.cleaned_data['nickname']
+        if Profile.objects.filter(nickname=nickname).exists():
+            raise forms.ValidationError("昵称已被使用")
+        return nickname
+
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
@@ -62,4 +86,9 @@ class RegForm(forms.Form):
         if password != password_again:
             raise forms.ValidationError("两次密码不一致")
         return password_again
+
+
+# class changeTeacherInfoForm(forms.Form):
+#     pass
+
 

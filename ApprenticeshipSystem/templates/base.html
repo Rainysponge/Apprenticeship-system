@@ -91,7 +91,7 @@ footer{
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% block Active %}{% endblock %}
-                            <a class="dropdown-item" href="#">个人信息</a>
+                            <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">我想当师傅</a>
                             <a class="dropdown-item" href="{% url 'logout' %}">注销</a>
 
                         </div>
