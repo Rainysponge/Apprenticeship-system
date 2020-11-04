@@ -22,6 +22,7 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=20, verbose_name='昵称')
     school = models.CharField(max_length=10, default='华东理工大学')
     sex = models.CharField(max_length=2, null=True)
+    grade = models.CharField(max_length=5)
     major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
@@ -33,10 +34,11 @@ class Teacher(models.Model):
     teacher_name = models.CharField(max_length=10, null=True)
     # teacher_Profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
 
-    enter_time = models.DateTimeField(null=True, blank=True)
-    grade = models.CharField(max_length=5, null=True)
+    # grade = models.CharField(max_length=5, null=True)
+
     # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING)
     skill = models.CharField(max_length=50, null=True)
+    enter_time = models.DateTimeField(null=True, blank=True)
     self_introduction = RichTextUploadingField(null=True)
 
     def __str__(self):
@@ -55,15 +57,14 @@ User.teacher = get_teacher
 
 
 class Student(models.Model):
-    student_No = models.ForeignKey(Profile, on_delete=models.DO_NOTHING, default='00000')
-    student_name = models.CharField(max_length=10)
-    # student_sex = models.ForeignKey(Sex, on_delete=models.DO_NOTHING)
-    school = models.CharField(max_length=10)
-    enter_time = models.DateTimeField()
-    grade = models.CharField(max_length=5)
-    # major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)  # 为什么就这里会报错？？？
-    help = models.CharField(max_length=50)
-    self_introduction = RichTextUploadingField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
+    student_name = models.CharField(max_length=10, null=True)
+
+    enter_time = models.DateTimeField(null=True, blank=True)
+
+    help = models.CharField(max_length=50, null=True)
+    self_introduction = RichTextUploadingField(null=True)
 
     def __str__(self):
         return self.student_name
@@ -113,6 +114,5 @@ User.get_nickname = get_nickname
 User.get_school = get_school
 User.get_sex = get_sex
 User.get_major = get_major
-
 
 User.Profile = get_Profile

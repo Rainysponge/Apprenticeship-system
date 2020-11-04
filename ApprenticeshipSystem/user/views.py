@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
-from .models import Profile, Teacher
+from .models import Profile, Teacher, Student
 from .forms import RegForm, LoginFrom
 from Apprenticeship.models import Homework
 from comment.models import Comment
@@ -25,12 +25,14 @@ def register(request):
             user.save()
             nickname = reg_form.cleaned_data['nickname']
             # 这个地方就是有病
-            profile = Profile.objects.create(user=user, sex=sex, nickname=nickname)
-            profile.save()
             grade = reg_form.cleaned_data['grade']
-            teacher = Teacher.objects.create(user=user, grade=grade)
+            profile = Profile.objects.create(user=user, sex=sex, nickname=nickname, grade=grade)
+            profile.save()
 
+            teacher = Teacher.objects.create(user=user, teacher_name=nickname)
             teacher.save()
+            student = Student.objects.create(user=user, student_name=nickname)
+            student.save()
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)

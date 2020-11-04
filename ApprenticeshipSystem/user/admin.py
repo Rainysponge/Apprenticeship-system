@@ -33,13 +33,13 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 @admin.register(Student)
-class BlogTypeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'enter_time', 'grade', 'help', 'self_introduction')
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'enter_time', 'help', 'self_introduction')
 
 
 @admin.register(Teacher)
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ('id', 'enter_time', 'grade', 'skill', 'self_introduction')
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ('id', 'teacher_name', 'enter_time', 'skill', 'self_introduction')
 
 
 @admin.register(Major)
