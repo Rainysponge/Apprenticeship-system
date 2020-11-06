@@ -97,8 +97,8 @@
 
                         {% csrf_token %}
                         <textarea class="form-control" id="comment_text" name="text" rows="3"></textarea>
-                        <input type="hidden" name="object_id" value="{{ movie.pk }}">
-                        <input type="hidden" name="content_type" value="m_info">
+                        <input type="hidden" name="object_id" value="#">
+                        <input type="hidden" name="content_type" value="#">
                         <br>
                         <button type="submit" class="btn btn-info">提交评论</button>
                     </form>

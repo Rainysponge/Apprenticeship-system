@@ -2,6 +2,7 @@
 {% block title %}{{ form_title }}{% endblock %}
 {% block content %}
     <br><br>
+    {% if user.Profile.pk %}
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
@@ -19,5 +20,44 @@
             </div>
         </div>
     </div>
+    {% else %}
+        <script>
+            alert("好像还没登录呢！\n请先登录哦~");
+
+        function JumpToHome()
+        {
+            window.location.href="{% url 'login' %}";
+        }
+
+        setTimeout(JumpToHome,1000);
+        </script>
+
+    {% endif %}
+
+    <script>
+        const test = window.location.href;
+        const e = test.split('/');
+        const l = e.length;
+
+
+        console.log(e);
+        console.log(l);
+        console.log(e[5]);
+        if ({{ user.Profile.pk }} == e[5]){
+            console.log("TRUE");
+
+        }else{
+            console.log("False");
+            alert("请不要修改别人的信息哦~");
+
+        function JumpToHome()
+        {
+            window.location.href="{% url 'home' %}";
+        }
+
+        setTimeout(JumpToHome,1000);
+        }
+
+    </script>
 
 {% endblock content %}

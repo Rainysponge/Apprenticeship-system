@@ -8,3 +8,6 @@ def home(request):
     return render(request, 'index.html', {})
 
 
+def Xuanke(request):
+    return render(request, 'xuanke.html', {})
+

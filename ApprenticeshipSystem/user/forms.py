@@ -101,8 +101,6 @@ class RegForm(forms.Form):
 
 
 class changeProfileInfoForm(forms.Form):
-
-
     GRADE = [
         ['大一', '大一'],
         ['大二', '大二'],
@@ -113,3 +111,9 @@ class changeProfileInfoForm(forms.Form):
     school = forms.CharField(label='学校',
                              max_length=30, min_length=2,
                              widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))
+
+
+class changeTeacherInfoForm(forms.Form):
+    skill = forms.CharField(label='学校',
+                            max_length=30, min_length=2,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))

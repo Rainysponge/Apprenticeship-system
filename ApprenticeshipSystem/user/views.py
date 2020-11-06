@@ -110,14 +110,11 @@ def changeProfileInfo(request, profile_pk):
     if request.method == 'POST':
         change_form = changeProfileInfoForm(request.POST)
         if change_form.is_valid():
-            profile = Profile.objects.filter(pk=profile_pk)
+            profile = Profile.objects.get(pk=profile_pk)
             profile.grade = change_form.cleaned_data['grade']
             profile.school = change_form.cleaned_data['school']
 
             profile.save()
-            # profile = Profile.objects.create(user=user, sex=sex, nickname=nickname,
-            #                                  grade=grade, student_ID=student_ID, real_name=real_name)
-            # profile.save()
 
             return render(request, 'index.html', {'massge': '基础信息已经更改'})
     else:
@@ -127,3 +124,23 @@ def changeProfileInfo(request, profile_pk):
     context['change_form'] = change_form
     context['form_title'] = '更改基础信息'
     return render(request, 'user/changeProfileInfo.html', context)
+
+
+# def changeTeacherInfo(request, profile_pk):
+#     if request.method == 'POST':
+#         change_form = changeProfileInfoForm(request.POST)
+#         if change_form.is_valid():
+#             profile = Profile.objects.get(pk=profile_pk)
+#             profile.grade = change_form.cleaned_data['grade']
+#             profile.school = change_form.cleaned_data['school']
+#
+#             profile.save()
+#
+#             return render(request, 'index.html', {'massge': '基础信息已经更改'})
+#     else:
+#         change_form = changeProfileInfoForm()
+#
+#     context = {}
+#     context['change_form'] = change_form
+#     context['form_title'] = '更改师傅信息'
+#     return render(request, 'user/changeProfileInfo.html', context)
