@@ -1,4 +1,11 @@
-﻿author:胡展翊
+﻿20_10_28
+更新了admin后台，需要在cmd或者anaconda中运行命令：
+pip install django-simpleui -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+加入了userApp,将登录注册放在了该app中，建立了profile类，添加了昵称属性。
+这是一次测试。
+在static里面可以找到一个层叠样式文件夹，将里面的bootstrap.css与css/bootstrap.css替换，并将base.html里的bootstrap.min.css改为bootstrap.css即可使用改样式，其具体效果请见bootswatch.com。
+author:胡展翊
 
 
 20_10_29
@@ -48,6 +55,8 @@ auth：胡展翊
 auth:胡展翊
 
 
-20_11_07
-文明6
+20_11_08
+需要pip install django-imagekit后运行，记得换源。
+更新了头像属性，该属性的前端修改还需要在做思考。
+index.html里面的js还未写完。
 auth：胡展翊
