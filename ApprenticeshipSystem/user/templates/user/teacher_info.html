@@ -13,7 +13,9 @@
                     <div class="card-header">师傅卡片</div>
 
                 <div class="card-body text-secondary">
+                    <img id="photo" src="{{ user.Profile.photo_resize_url }}" alt="#">
                     <h2 class="card-title">{{ user.Profile.nickname }}</h2>
+
                     <div class="row">
                         <div class="col-md-4">
 
@@ -56,10 +58,10 @@
 {#                            data-content="右侧的 Popover 中的一些内容">#}
 {#                            右侧的 Popover#}
 {#                    </button>#}
-                    <script> $(function (){
-                        $("[data-toggle='popover']").popover();
-                        });
-                    </script>
+{#                    <script> $(function (){#}
+{#                        $("[data-toggle='popover']").popover();#}
+{#                        });#}
+{#                    </script>#}
 
 
 
@@ -113,7 +115,33 @@
             </div>
         </div>
     </div>
+    <script>
+        const test = window.location.href;
+        const e = test.split('/');
+        const l = e.length;
 
+
+        //console.log(e);
+        //console.log(l);
+        //console.log(e[5]);
+
+        if ({{ user.teacher.pk }} == e[5]){
+            console.log("TRUE");
+
+        }else{
+            console.log("False");
+            console.log({{ user.teacher.pk }})
+            alert("这是别人的de私人信息哦~");
+
+        function JumpToHome()
+        {
+            window.location.href="{% url 'home' %}";
+        }
+
+        setTimeout(JumpToHome,1000);
+        }
+
+    </script>
 
 
 

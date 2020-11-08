@@ -108,6 +108,7 @@ class changeProfileInfoForm(forms.Form):
         ['大四', '大四']
     ]
     grade = forms.ChoiceField(label='年级', choices=GRADE)
+    # portrait = forms.ImageField(label='帅气DE头像', help_text='不能超过5M!')
     school = forms.CharField(label='学校',
                              max_length=30, min_length=2,
                              widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))

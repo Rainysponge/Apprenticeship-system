@@ -8,6 +8,7 @@ from .forms import RegForm, LoginFrom, changeProfileInfoForm
 from Apprenticeship.models import Homework
 from comment.models import Comment
 from comment.forms import CommentForm
+from .tools import user_directory_path
 
 
 # Create your views here.
@@ -108,21 +109,23 @@ def teacher_info(request, teacher_pk):
 
 def changeProfileInfo(request, profile_pk):
     if request.method == 'POST':
-        change_form = changeProfileInfoForm(request.POST)
+        change_form = changeProfileInfoForm(request.POST, request.FILES)
         if change_form.is_valid():
             profile = Profile.objects.get(pk=profile_pk)
             profile.grade = change_form.cleaned_data['grade']
             profile.school = change_form.cleaned_data['school']
+            # profile.portrait = change_form.cleaned_data['portrait']
 
             profile.save()
 
-            return render(request, 'index.html', {'massge': '基础信息已经更改'})
+            return render(request, 'index.html', {'massage': '基础信息已经更改'})
     else:
         change_form = changeProfileInfoForm()
 
     context = {}
     context['change_form'] = change_form
     context['form_title'] = '更改基础信息'
+    # context['ruser'] = str(request.user.username)
     return render(request, 'user/changeProfileInfo.html', context)
 
 
