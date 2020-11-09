@@ -64,3 +64,7 @@ auth：胡展翊
 20_11_09
 更新了评论显示，使评论内容不再以html样子显示
 将url "homework"更名为"homework_detail" 为后续建立"homework_list"页面做准备
+auth:吴一楠
+
+解决了修改头衔会报错的问题，现在可以在前端修改图像了，加入了一些JS的判断，使得部分用户可以直接从前端跳转到ADMIN。
+auth:胡展翊
