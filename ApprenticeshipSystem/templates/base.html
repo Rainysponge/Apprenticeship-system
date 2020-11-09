@@ -91,8 +91,19 @@ footer{
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% block Active %}{% endblock %}
+
                             <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>
                             <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">我想当师傅</a>
+                            {% if user.is_staff %}
+                            <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>
+                                <script>
+                                    const test = window.location.href;
+                                    const e = test.split('/');
+                                    const homeUrl = e[2];
+                                    const item = 'http://'+homeUrl+'/admin';
+                                    document.getElementById('goToAdmin').href = item;
+                                </script>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'logout' %}">注销</a>
 
                         </div>

@@ -89,12 +89,7 @@ class Student(models.Model):
         return self.student_name
 
 
-def get_nickname(self):
-    if Profile.objects.filter(user=self).exists():
-        profile = Profile.objects.get(user=self)
-        return profile.nickname
-    else:
-        return ''
+
 
 
 def get_school(self):
@@ -113,25 +108,7 @@ def get_Profile(self):
         return ''
 
 
-def get_sex(self):
-    if Profile.objects.filter(user=self).exists():
-        profile = Profile.objects.get(user=self)
-        return profile.sex
-    else:
-        return ''
-
-
-def get_major(self):
-    if Profile.objects.filter(user=self).exists():
-        profile = Profile.objects.get(user=self)
-        return profile.major
-    else:
-        return ''
-
-
 User.get_nickname = get_nickname
 User.get_school = get_school
-User.get_sex = get_sex
-User.get_major = get_major
 
 User.Profile = get_Profile
