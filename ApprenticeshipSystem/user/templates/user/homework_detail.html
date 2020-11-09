@@ -48,9 +48,12 @@
                         <h3 class="comment-area-title">评论列表</h3>
                         {% for comment in comments %}
                             <div>
+                                {# {% autoescape off %}让富文本不以html显示 #}
+                                {% autoescape off %}
                                 {{ comment.user }}
                                 ({{ comment.comment_time|date:"Y-m-d H:n:s" }}):
                                 {{ comment.text }}
+                                {% endautoescape %}
                             </div>
                         {% empty %}
                             暂无评论

@@ -60,3 +60,7 @@ auth:胡展翊
 更新了头像属性，该属性的前端修改还需要在做思考。
 index.html里面的js还未写完。
 auth：胡展翊
+
+20_11_09
+更新了评论显示，使评论内容不再以html样子显示
+将url "homework"更名为"homework_detail" 为后续建立"homework_list"页面做准备

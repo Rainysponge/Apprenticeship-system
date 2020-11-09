@@ -74,7 +74,7 @@ def logout(request):
     return redirect(request.GET.get('from', reverse('home')))
 
 
-def homework(request):
+def homework_detail(request):
     homework1 = get_object_or_404(Homework, pk=1)
     # comments = Comment.objects.filter(pk=1)
     comments = Comment.objects.all()
@@ -87,7 +87,7 @@ def homework(request):
     data['homework_id'] = homework1.id
     context['comment_form'] = CommentForm(initial=data)
     context['homework'] = homework1
-    return render(request, 'user/homework.html', context)
+    return render(request, 'user/homework_detail.html', context)
 
 
 def teacher_list(request):
