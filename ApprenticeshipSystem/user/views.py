@@ -41,7 +41,7 @@ def register(request):
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
-            return render(request, 'index.html', {'massge': '恭喜你已经成功注册啦，赶紧登录试试吧！'})
+            return render(request, 'index.html', {'massage': '恭喜你已经成功注册啦，赶紧登录试试吧！'})
     else:
         reg_form = RegForm()
 
@@ -57,8 +57,9 @@ def login(request):
         if login_form.is_valid():
             user = login_form.cleaned_data['user']
             auth.login(request, user)
+            context = {'log_massage': request.GET.get('from')}
             # return redirect(request.GET.get('from', reverse('home')))
-            return render(request, 'index.html', {})
+            return render(request, 'index.html', context)
     else:
         login_form = LoginFrom()
 
@@ -114,7 +115,8 @@ def changeProfileInfo(request, profile_pk):
             profile = Profile.objects.get(pk=profile_pk)
             profile.grade = change_form.cleaned_data['grade']
             profile.school = change_form.cleaned_data['school']
-            # profile.portrait = change_form.cleaned_data['portrait']
+            profile.portrait = request.FILES['portrait']
+            # 虽然我也不知道原理是啥，本来只是随便试试，没想到直接就可以了哈哈哈
 
             profile.save()
 
