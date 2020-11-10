@@ -93,9 +93,10 @@ def homework_detail(request):
 
 def teacher_list(request):
     # tlist = Teacher.objects.get()
+    teacher_list = Teacher.objects.all()
 
     context = {}
-    # context['teacher_list'] = tlist
+    context['teacher_list'] = teacher_list
 
     return render(request, 'user/teacher_list.html', context)
 

@@ -108,7 +108,7 @@ def get_Profile(self):
         return ''
 
 
-User.get_nickname = get_nickname
+#User.get_nickname = get_nickname
 User.get_school = get_school
 
 User.Profile = get_Profile
