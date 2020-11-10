@@ -132,6 +132,9 @@ def changeProfileInfo(request, profile_pk):
     return render(request, 'user/changeProfileInfo.html', context)
 
 
+def homework_list(request):
+    context = {}
+    return render(request, 'user/homework_list.html', context)
 # def changeTeacherInfo(request, profile_pk):
 #     if request.method == 'POST':
 #         change_form = changeProfileInfoForm(request.POST)

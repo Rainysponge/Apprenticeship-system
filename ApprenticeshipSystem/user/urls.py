@@ -9,4 +9,5 @@ urlpatterns = [
     path('homework/1/', views.homework_detail, name='homework_detail'),     # 后续改成int[]形式
     path('teacher', views.teacher_list, name='teacher_list'),
     path('teacher/<int:teacher_pk>', views.teacher_info, name='teacher_info'),
+    path('homework_list/', views.homework_list, name='homework_list'),
 ]

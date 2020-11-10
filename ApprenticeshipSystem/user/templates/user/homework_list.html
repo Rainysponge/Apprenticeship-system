@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}作业列表{% endblock %}
+{% block content %}
+<nav class="nav mb-4" style="padding:1rem ;background-color:white">
+    <div class=" col-1"></div>
+    <div class=" col-11"><a class="nav-link active" href="#"><h4>数据库</h4></a></div>
+</nav>
+    <div class="container">
+     <div class="row">
+    <div class=" col"></div>
+    <div class=" col-10" >
+     <ul class="nav nav-tabs mb-3" style="background-color:whitesmoke">
+     <li class="nav-item">
+      <a class="nav-link active" href="#"> 我的作业</a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link" href="#"> 已交作业</a>
+     </li>
+    </ul>
+        <div class="row row-cols-1 row-cols-md-3" id="homework"></div>
+        </div>
+    <div class=" col"></div>
+  </div>
+    </div>
+
+<button type="button" class="btn btn-primary " onclick="add_div()" style="width: 150px">添加作业</button>
+    
+<script>
+function add_div() {
+$("#homework").append('<div class="col mb-4">'+'<div class="card">'+
+    '<div class="card-header">第一次作业</div>'+
+    '<div class="card-body">'+
+    '<p class="card-text">截止时间：</p>'+
+    '<p class="card-text">作业状态：</p>'+
+    '<p class="card-text">发布时间：</p>'+
+    '<a class="btn btn-primary " href="#" role="button" style="background:darkseagreen;width: 100px">提交</a>'+
+    '</div>' +
+    '</div>' +
+    '</div>'
+
+
+)
+}
+
+
+</script>
+    {% endblock%}

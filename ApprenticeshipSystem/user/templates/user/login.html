@@ -13,7 +13,12 @@
                     {% csrf_token %}
                     {% for field in login_form %}
                         <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
-                        {{ field }}
+
+                           <div class="input-group">
+                          <div class="input-group-prepend">{% if field.label == "用户名" %}
+                              <span class="input-group-text" ><i class="fa fa-user-circle-o" ></i></span>{% endif %}
+                              {% if field.label == "密码" %}<span class="input-group-text" ><i class="fa fa-key" ></i></span>{% endif %}
+                              {{ field }}</div></div>
                         <p class="text-danger">{{ field.errors.as_text }}</p>
                     {% endfor %}
                     <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
