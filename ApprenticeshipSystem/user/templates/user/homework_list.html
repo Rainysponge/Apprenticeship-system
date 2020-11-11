@@ -27,9 +27,10 @@
 <button type="button" class="btn btn-primary " onclick="add_div()" style="width: 150px">添加作业</button>
     
 <script>
+var count = 1; //如果需要全局的话还是建议把这个数据放在数据库里面
 function add_div() {
 $("#homework").append('<div class="col mb-4">'+'<div class="card">'+
-    '<div class="card-header">第一次作业</div>'+
+    '<div class="card-header">第'+ count +'次作业</div>'+
     '<div class="card-body">'+
     '<p class="card-text">截止时间：</p>'+
     '<p class="card-text">作业状态：</p>'+
@@ -40,7 +41,8 @@ $("#homework").append('<div class="col mb-4">'+'<div class="card">'+
     '</div>'
 
 
-)
+);
+count = count + 1;
 }
 
 

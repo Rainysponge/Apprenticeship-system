@@ -13,10 +13,19 @@
                         <p class="text-danger">{{ field.errors.as_text }}</p>
                     {% endfor %}
                     <span class="pull-left text-danger">{{ reg_form.non_field_errors }}</span>
-                    <button type="submit" class="btn btn-info">注册</button>
+                    <button id="submit" v-bind:title="message" type="submit" class="btn btn-info">注册</button>
                 </form>
             </div>
         </div>
     </div>
+
+     <script>
+        var submit = new Vue({
+          el: '#submit',
+          data: {
+            message: '注意信息的正确性哦~\n ' + new Date().toLocaleString()
+          }
+        })
+    </script>
 
 {% endblock content %}

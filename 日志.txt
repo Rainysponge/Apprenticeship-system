@@ -81,3 +81,6 @@ auth:胡展翊
 20_11_11
 修改了teacger_info_outside.html页面对应的view方法，在此页面可以完成计数功能
 auth:吴一楠
+
+日志明天再写。
+auth:胡展翊
