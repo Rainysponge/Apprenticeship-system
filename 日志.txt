@@ -72,3 +72,8 @@ auth:胡展翊
 20_11_10
 算是改了改teacher_list页面吧..感觉也没干啥，bootstrap上也没有好看的表单
 auth:吴一楠
+
+调整了teacher_list的数据获取方法，现在可以在前端看有user对应的Teacher信息，这边打算将teacher_info改为个人中心，可以看到自己的老师和学生的全部个人信息，只能个人打开。
+而其老师的详细信息则在Teacher_info_outside中展示。
+现在已经有teacger_info_outside.html，具体方法也写了，在前端调用数据时，大概是要像{{ user_outside.teacher.pk }}这个样子，user_outside.teacher可以得到该用户对应老师身份的所有信息，当然{{ user_outside.Profile }}可以得到所有该user对应的Profile信息。
+auth:胡展翊
