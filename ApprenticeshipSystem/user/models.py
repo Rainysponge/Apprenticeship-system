@@ -61,7 +61,10 @@ class Teacher(models.Model):
     self_introduction = RichTextUploadingField(null=True)
 
     def __str__(self):
-        return self.teacher_name
+        if self.teacher_name:
+            return self.teacher_name
+        else:
+            return '未知'
 
 
 def get_teacher(self):
@@ -89,7 +92,12 @@ class Student(models.Model):
         return self.student_name
 
 
+class ReadNum(models.Model):
+    read_num = models.IntegerField(default=0)
+    teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return 'abc'
 
 
 def get_school(self):

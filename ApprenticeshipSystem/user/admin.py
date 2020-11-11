@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from .models import Profile, Sex, Major, Student, Teacher
+from .models import Profile, Sex, Major, Student, Teacher, ReadNum
 
 
 class ProfileInline(admin.StackedInline):
@@ -50,3 +50,8 @@ class MajorAdmin(admin.ModelAdmin):
 @admin.register(Sex)
 class SexAdmin(admin.ModelAdmin):
     list_display = ('id', 'sex')
+
+
+@admin.register(ReadNum)
+class ReadNumAdmin(admin.ModelAdmin):
+    list_display = ('read_num', 'teacher')
