@@ -47,7 +47,7 @@
 
 <div class="container">
     {% if user.is_authenticated %}
-        {{ user.get_nickname }}!{{ user.get_school }}
+        {{ user.Profile.nickname }}!{{ user.get_school }}
     {% else %}
 
     {% endif %}
@@ -94,7 +94,7 @@
         <script>
             const massage = "{{ massage }}";
             //判断如果massage是否为空
-            console.log('{{ log_massage }}')
+            console.log('{{ log_massage }}');
             if (massage.length != 0){
                 alert('{{ massage.title }}');
                 //console.log('{{ massage }}');

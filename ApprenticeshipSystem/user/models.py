@@ -89,7 +89,10 @@ class Student(models.Model):
     self_introduction = RichTextUploadingField(null=True)
 
     def __str__(self):
-        return self.student_name
+        if self.student_name:
+            return self.student_name
+        else:
+            return '未知'
 
 
 class ReadNum(models.Model):
@@ -116,7 +119,6 @@ def get_Profile(self):
         return ''
 
 
-#User.get_nickname = get_nickname
 User.get_school = get_school
 
 User.Profile = get_Profile

@@ -34,12 +34,12 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'enter_time', 'help', 'self_introduction')
+    list_display = ('id', 'user', 'enter_time', 'help', 'self_introduction')
 
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('id', 'teacher_name', 'enter_time', 'skill', 'self_introduction')
+    list_display = ('id', 'user', 'teacher_name', 'enter_time', 'skill', 'self_introduction')
 
 
 @admin.register(Major)

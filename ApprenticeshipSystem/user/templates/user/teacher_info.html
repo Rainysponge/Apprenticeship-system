@@ -49,19 +49,9 @@
                         {{ teacher.self_introduction }}
 
                     {% endautoescape %}</p>
-{#                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamussagittis lacus vel augue laoreet rutrum faucibus.">#}
-{#                      Popover on bottom#}
-{#                    </button>#}
+
                     <button type="button" class="btn btn-primary" href="#">修改师傅您的信息</button>
-{#                    <button type="button" class="btn btn-warning" title="Popover title"#}
-{#                            data-container="body" data-toggle="popover" data-placement="right"#}
-{#                            data-content="右侧的 Popover 中的一些内容">#}
-{#                            右侧的 Popover#}
-{#                    </button>#}
-{#                    <script> $(function (){#}
-{#                        $("[data-toggle='popover']").popover();#}
-{#                        });#}
-{#                    </script>#}
+
 
 
 
@@ -92,9 +82,7 @@
                     </div>
                 </div>
 
-{#                <div class="comment-area" style="margin-top: 2em">#}
-{#                    <h3 class="commet-area-title" style="border-bottom: 1px solid #ccc;padding-bottom: 0.4em">发表评论</h3>#}
-{#                    {% if user.is_authenticated %}#}
+
                     <form action="#" method="post">
 
                         {% csrf_token %}
@@ -120,7 +108,7 @@
         const e = test.split('/');
         const l = e.length;
 
-        console.log('{{ user.Profile.photo_resize_url }}');
+        {#console.log('{{ user.Profile.photo_resize_url }}');#}
         //console.log(e);
         //console.log(l);
         //console.log(e[5]);
@@ -130,7 +118,7 @@
 
         }else{
             console.log("False");
-            console.log({{ user.teacher.pk }})
+            console.log({{ user.teacher.pk }});
             alert("这是别人的de私人信息哦~");
 
         function JumpToHome()
@@ -138,7 +126,7 @@
             window.location.href="{% url 'home' %}";
         }
 
-        setTimeout(JumpToHome,1000);
+        setTimeout(JumpToHome, 0);
         }
 
     </script>

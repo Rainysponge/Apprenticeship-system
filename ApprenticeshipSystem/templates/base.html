@@ -56,8 +56,8 @@ footer{
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link {% block homeActive %}{% endblock %}" href="{% url 'home' %}">主页 <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link {% block homeActive %}{% endblock %}" href="{% url 'home' %}">主页<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% block TeaActive %}{% endblock %}" href="{% url 'teacher_list' %}">师傅列表<span class="sr-only">(current)</span></a>
@@ -97,9 +97,9 @@ footer{
                             {% if user.is_staff %}
                             <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>
                                 <script>
-                                    const test = window.location.href;
-                                    const e = test.split('/');
-                                    const homeUrl = e[2];
+                                    const test_base = window.location.href;
+                                    const e_base = test_base.split('/');
+                                    const homeUrl = e_base[2];
                                     const item = 'http://'+homeUrl+'/admin';
                                     document.getElementById('goToAdmin').href = item;
                                 </script>

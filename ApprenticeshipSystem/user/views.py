@@ -93,10 +93,13 @@ def homework_detail(request):
 
 def teacher_list(request):
     # tlist = Teacher.objects.get()
-    teacher_list = Teacher.objects.all()
-
+    Teacher_list = Teacher.objects.all()
+    users = User.objects.all()
+    # profile = Profile.objects.all()
     context = {}
-    context['teacher_list'] = teacher_list
+    context['teacher_list'] = Teacher_list
+    context['users'] = users
+    # context['profile'] = profile
 
     return render(request, 'user/teacher_list.html', context)
 
@@ -135,21 +138,13 @@ def changeProfileInfo(request, profile_pk):
 def homework_list(request):
     context = {}
     return render(request, 'user/homework_list.html', context)
-# def changeTeacherInfo(request, profile_pk):
-#     if request.method == 'POST':
-#         change_form = changeProfileInfoForm(request.POST)
-#         if change_form.is_valid():
-#             profile = Profile.objects.get(pk=profile_pk)
-#             profile.grade = change_form.cleaned_data['grade']
-#             profile.school = change_form.cleaned_data['school']
-#
-#             profile.save()
-#
-#             return render(request, 'index.html', {'massge': '基础信息已经更改'})
-#     else:
-#         change_form = changeProfileInfoForm()
-#
-#     context = {}
-#     context['change_form'] = change_form
-#     context['form_title'] = '更改师傅信息'
-#     return render(request, 'user/changeProfileInfo.html', context)
+
+
+def teacher_info_outside(request, user_pk):
+    user_outside = User.objects.filter(pk=user_pk).first()
+    # teacher = Teacher.objects.filter(user=user_outside)
+
+    context = {}
+    context['user_outside'] = user_outside
+    # context['teacher'] = teacher
+    return render(request, 'user/teacher_info_outside.html', context)
