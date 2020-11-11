@@ -77,3 +77,7 @@ auth:吴一楠
 而其老师的详细信息则在Teacher_info_outside中展示。
 现在已经有teacger_info_outside.html，具体方法也写了，在前端调用数据时，大概是要像{{ user_outside.teacher.pk }}这个样子，user_outside.teacher可以得到该用户对应老师身份的所有信息，当然{{ user_outside.Profile }}可以得到所有该user对应的Profile信息。
 auth:胡展翊
+
+20_11_11
+修改了teacger_info_outside.html页面对应的view方法，在此页面可以完成计数功能
+auth:吴一楠

@@ -60,6 +60,9 @@ class Teacher(models.Model):
     enter_time = models.DateTimeField(null=True, blank=True)
     self_introduction = RichTextUploadingField(null=True)
 
+    def get_read_num(self):
+        return self.readnum.read_num
+
     def __str__(self):
         if self.teacher_name:
             return self.teacher_name
