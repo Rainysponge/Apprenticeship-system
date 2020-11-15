@@ -5,9 +5,12 @@
     <br>
     <br>
     <br>
-    123
-    {#    {{ user_outside.teacher }}    #}
-    计数：{{ teacher.get_read_num }}
+    {% if teacher.teacher_name %}
+        {{ teacher.teacher_name }}
+    {% else %}
+        神秘的老师
+    {% endif %}
+    计数：{{ teacher.readnum }}
     <script>
 
 

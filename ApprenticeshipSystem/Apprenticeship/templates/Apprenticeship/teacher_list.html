@@ -4,28 +4,55 @@
 
 {% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
 
+{% block TeaActive %}active{% endblock %}
+{% block homeActive %}{% endblock %}
+
 {% block content %}
     <br>
-<div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>师傅名</th>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>头像</th>
+                        <th>师傅名</th>
 
-            </tr>
-          </thead>
-          <tbody>
-		  {% for teacher in teacher_list %}
-            <tr>
-              <td>{{ teacher.pk }}</td>
-              <td><a href="{% url 'teacher_info' teacher.pk %}">{{ movie.name }}</a></td>
+                        <th>加入时间</th>
+                        <th>简单介绍</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for one_user in users %}
+                    {% if one_user.teacher %}
+                    <tr>
 
-            </tr>
-			{% empty %}
-				<h3>---暂无信息---</h3>
-			{% endfor %}
-          </tbody>
-        </table>
-      </div>
+                      <td>{{ one_user.teacher.pk }}</td>
+                        <td><img id="photo" src="{{ one_user.Profile.photo_resize_url }}"height="104" width="74" alt="#"></td>
+                      <td><a href="{% url 'teacher_info_outside' one_user.teacher.pk %}">{{ one_user.teacher.teacher_name }}</a></td>
+                                {#<span class="glyphicon glyphicon-tag"></span><a href="{% url 'blogs_with_type' blog.blog_type.pk %}" >{{ blog.blog_type }}</a>#}
+                                {#<span class="glyphicon glyphicon-time"></span>{{ teacher.enter_time|date:"Y-m-d" }}#}
+                        <td>{{ one_user.teacher.enter_time|date:"Y-m-d" }}</td>
+                                {# 阅读({{ blog.get_read_num }}) #}
+                        <td>{{ one_user.teacher.self_introduction|striptags|truncatechars:"5" }}...</td>
+                            {# striptags 用于去除文本中的html标签 #}
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                        <h3>---暂无信息---</h3>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+
 {% endblock %}

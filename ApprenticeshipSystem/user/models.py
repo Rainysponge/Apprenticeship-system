@@ -103,7 +103,10 @@ class ReadNum(models.Model):
     teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return 'abc'
+        if self.read_num:
+            return str(self.read_num)
+        else:
+            return '0'
 
 
 def get_school(self):

@@ -1,4 +1,3 @@
-# homework_pk报错 还有homework.html找不到url 'update_comment'
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import auth
@@ -75,44 +74,9 @@ def logout(request):
     return redirect(request.GET.get('from', reverse('home')))
 
 
-def homework_detail(request):
-    homework1 = get_object_or_404(Homework, pk=1)
-    # comments = Comment.objects.filter(pk=1)
-    comments = Comment.objects.all()
-
-    context = {}
-    context['user'] = request.user
-    context['comments'] = comments
-
-    data = {}  # 用于初始
-    data['homework_id'] = homework1.id
-    context['comment_form'] = CommentForm(initial=data)
-    context['homework'] = homework1
-    return render(request, 'user/homework_detail.html', context)
-
-
-def teacher_list(request):
-    # tlist = Teacher.objects.get()
-    Teacher_list = Teacher.objects.all()
-    users = User.objects.all()
-    # profile = Profile.objects.all()
-    context = {}
-    context['teacher_list'] = Teacher_list
-    context['users'] = users
-    # context['profile'] = profile
-
-    return render(request, 'user/teacher_list.html', context)
-
-
+# 这个之后要做成个人中心 要加入个人学生的信息
 def teacher_info(request, teacher_pk):
     teacher = get_object_or_404(Teacher, pk=teacher_pk)
-    # if ReadNum.objects.filter(teacher=teacher).count():
-    #     readnum = ReadNum.objects.get(teacher=teacher)
-    # else:
-    #     readnum = ReadNum(teacher=teacher)
-    # readnum.read_num += 1
-    # readnum.save()
-
 
     context = {}
     context['teacher'] = teacher
@@ -127,7 +91,6 @@ def changeProfileInfo(request, profile_pk):
             profile.grade = change_form.cleaned_data['grade']
             profile.school = change_form.cleaned_data['school']
             profile.portrait = request.FILES['portrait']
-            # 虽然我也不知道原理是啥，本来只是随便试试，没想到直接就可以了哈哈哈
 
             profile.save()
 
@@ -140,26 +103,3 @@ def changeProfileInfo(request, profile_pk):
     context['form_title'] = '更改基础信息'
     # context['ruser'] = str(request.user.username)
     return render(request, 'user/changeProfileInfo.html', context)
-
-
-def homework_list(request):
-    context = {}
-    return render(request, 'user/homework_list.html', context)
-
-
-def teacher_info_outside(request, user_pk):
-    #user_outside = User.objects.filter(pk=user_pk).first()
-    #teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
-    teacher = get_object_or_404(Teacher, pk=user_pk)
-
-    if ReadNum.objects.filter(teacher=teacher).count():
-        readnum = ReadNum.objects.get(teacher=teacher)
-    else:
-        readnum = ReadNum(teacher=teacher)
-    readnum.read_num += 1
-    readnum.save()
-
-    context = {}
-    #context['user_outside'] = user_outside
-    context['teacher'] = teacher
-    return render(request, 'user/teacher_info_outside.html', context)
