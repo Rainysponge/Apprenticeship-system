@@ -53,38 +53,27 @@
     {% endif %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">人气"师傅”</h1>
-    </div>
 
     <hr>
     <!-- 推荐内容 -->
     <div class="row">
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="/media/upload/2020/06/09/pfpchq.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        {% for readnum in hot_read_nums %}
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+              <img src="/media/upload/2020/06/09/pfpchq.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                    <p class="card-text">
+                        {{ readnum.teacher.teacher_name }}:
+                        {% autoescape off %}
+                            {{ readnum.teacher.self_introduction }}
+                        {% endautoescape %}
+                    </p>
+              </div>
+            </div>
           </div>
-        </div>
-
-      </div>
-
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="/media/upload/2020/06/09/pfpchq.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="/media/upload/2020/06/09/pfpchq.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        {% empty %}
+            暂无热门教师
+        {% endfor %}
 
     <hr>
 

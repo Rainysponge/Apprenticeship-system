@@ -99,3 +99,7 @@ class ReadNum(models.Model):
             return '0'
 这个就比较简单，无需再写一个get_read_num方法。前端可用{{ teacher.readnum }}或者{{ teacher.readnum. read_num}}使用。
 auth:胡展翊
+
+20_11_16
+将teacher对Readnum进行排序，筛选出前三个在首页进行显示
+auth:吴一楠
