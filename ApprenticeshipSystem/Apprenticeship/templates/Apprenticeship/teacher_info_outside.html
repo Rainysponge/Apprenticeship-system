@@ -11,8 +11,52 @@
         神秘的老师
     {% endif %}
     计数：{{ teacher.readnum }}
-    <script>
+    <script>  </script>
+                    <div class="comment-area" style="margin-top: 2em">
+                    <h3 class="commet-area-title" style="border-bottom: 1px solid #ccc;padding-bottom: 0.4em">
+                        来自"徒弟"们祝福
+                    </h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            {% for comment in comments %}
+                                <tr>
+                                    <td style="width: 15em">{{ comment.user.username }}
+                                    ({{ comment.comment_time |date:"Y-m-d H:n:s" }})</td>
+                                    <td>
+                                        {% autoescape off %}
+                                        {{ comment.text }}
+                                        {% endautoescape %}
+                                    <p></p><button type="button" class="btn btn-outline-info btn-sm">预览</button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm">编辑</button>
+                                    </td>
+                                </tr>
+                            {% empty %}
+
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
 
 
-    </script>
+                    <form action="#" method="post">
+
+                        {% csrf_token %}
+                        <textarea class="form-control" id="comment_text" name="text" rows="3"></textarea>
+                        <input type="hidden" name="object_id" value="#">
+                        <input type="hidden" name="content_type" value="#">
+                        <br>
+                        <button type="submit" class="btn btn-info">提交评论</button>
+                    </form>
+{#                {% else %}#}
+{#                    尚未登录，登录之后方可评论#}
+{#                    <a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>#}
+{#                    <span>or</span>#}
+{#                    <a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>#}
+{#                {% endif %}#}
+{#                </div>#}
+
+
+
 {% endblock %}

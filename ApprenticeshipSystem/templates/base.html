@@ -35,6 +35,7 @@ body{
     display: flex;
     flex-direction: column;
     height: 100%;
+    font-family: '微软雅黑';
 }
 .main-content{
    flex: 1 0 auto;
@@ -48,7 +49,9 @@ footer{
 }
 </style>
 </head>
+{% block bodyBack %}
 <body class="bg-light">
+{% endblock %}
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">奇怪的拜师系统</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +97,7 @@ footer{
                             {% block Active %}{% endblock %}
 
                             <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>
-                            <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">我想当师傅</a>
+                            <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">个人中心</a>
                             {% if user.is_staff %}
                             <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>
                                 <script>
@@ -138,6 +141,6 @@ footer{
     </footer>
 
     <script src="{% static "jquery-3.5.1.slim.min.js" %}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="{% static "bootstrap-4.5.0-dist/js/bootstrap.min.js" %}" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{% static "bootstrap-4.5.0-dist/js/bootstrap.js" %}" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

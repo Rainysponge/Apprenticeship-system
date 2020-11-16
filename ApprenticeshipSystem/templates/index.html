@@ -2,7 +2,9 @@
 {% block title %}奇怪的拜师系统{% endblock %}
 {% block homeActive %} active {% endblock %}
 
-{% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
+{% block header_extends %}
+
+{% endblock %}
 
 {% block content %}
 
@@ -60,14 +62,16 @@
         {% for readnum in hot_read_nums %}
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-              <img src="{{ readnum.user.Profile.photo_resize_url }}" class="card-img-top" alt="...">
+              <img src="{{ readnum.user.Profile.photo_resize_url }}" class="card-img-top" height="247" width="148" alt="...">
               <div class="card-body">
                     <p class="card-text">
                         {{ readnum.teacher.teacher_name }}:
                         {% autoescape off %}
-                            {{ readnum.teacher.self_introduction }}
+                            <p>擅长：{{ readnum.teacher.skill }}</p>
                         {% endautoescape %}
+
                     </p>
+                    <a href="#" class="card-link">看看主页</a>
               </div>
             </div>
           </div>

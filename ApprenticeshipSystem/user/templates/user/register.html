@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}{{ form_title }}{% endblock %}
+{% block bodyBack %}
+<body class="bg-light" style="background-image:url('/media/6.jpg');background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed; ">
+
+{% endblock %}
 {% block content %}
     <br><br>
     <div class="container">
@@ -9,11 +13,13 @@
                     {% csrf_token %}
                     {% for field in reg_form %}
                         <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
-                        {{ field }}
+
+                            {{ field }}
+
                         <p class="text-danger">{{ field.errors.as_text }}</p>
                     {% endfor %}
                     <span class="pull-left text-danger">{{ reg_form.non_field_errors }}</span>
-                    <button id="submit" v-bind:title="message" type="submit" class="btn btn-info">注册</button>
+                    <button id="submit" v-bind:title="message" type="submit" class="btn btn-info btn-lg btn-block">注册</button>
                 </form>
             </div>
         </div>

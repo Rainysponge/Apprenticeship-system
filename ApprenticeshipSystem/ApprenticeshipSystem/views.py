@@ -10,26 +10,25 @@ def home(request):
     # hot_teachers = []
     # for i in range(0, 3):
     #     hot_teachers.append(teachers[i])
-    #users = User.objects.all().order_by('-')
+    # users = User.objects.all().order_by('-')
 
     read_nums = ReadNum.objects.all().order_by('-read_num')
     hot_read_nums = []
     hot_teachers = []
-    #hot_users = []
+    # hot_users = []
 
     for i in range(0, 3):
         hot_read_nums.append(read_nums[i])
         hot_teachers.append(teachers[i])
-        #hot_users.append(user[i])
+        # hot_users.append(user[i])
     context = {}
     context['teachers'] = teachers
     context['read_nums'] = read_nums
     context['hot_read_nums'] = hot_read_nums
-    #context['users'] = users
+    # context['users'] = users
     context['hot_teachers'] = hot_teachers
     return render(request, 'index.html', context)
 
 
 def Xuanke(request):
     return render(request, 'xuanke.html', {})
-
