@@ -60,7 +60,7 @@
         {% for readnum in hot_read_nums %}
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-              <img src="/media/upload/2020/06/09/pfpchq.jpg" class="card-img-top" alt="...">
+              <img src="{{ readnum.user.Profile.photo_resize_url }}" class="card-img-top" alt="...">
               <div class="card-body">
                     <p class="card-text">
                         {{ readnum.teacher.teacher_name }}:

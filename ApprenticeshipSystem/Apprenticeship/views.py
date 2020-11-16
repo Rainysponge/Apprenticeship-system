@@ -36,21 +36,21 @@ def homework_detail(request):
     return render(request, 'Apprenticeship/homework_detail.html', context)
 
 
-def teacher_info_outside(request, user_teacher_pk):
+def teacher_info_outside(request, user_pk):
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
-    teacher = get_object_or_404(Teacher, pk=user_teacher_pk)
+    user = get_object_or_404(User, pk=user_pk)
 
-    if ReadNum.objects.filter(teacher=teacher).count():
-        readnum = ReadNum.objects.get(teacher=teacher)
+    if ReadNum.objects.filter(user=user).count():
+        readnum = ReadNum.objects.get(user=user)
     else:
-        readnum = ReadNum(teacher=teacher)
+        readnum = ReadNum(teacher=user.teacher, user=user)
     readnum.read_num += 1
     readnum.save()
 
     context = {}
     # context['user_outside'] = user_outside
-    context['teacher'] = teacher
+    context['teacher'] = user.teacher
     return render(request, 'Apprenticeship/teacher_info_outside.html', context)
 
 

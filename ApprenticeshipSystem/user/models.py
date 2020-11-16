@@ -101,6 +101,7 @@ class Student(models.Model):
 class ReadNum(models.Model):
     read_num = models.IntegerField(default=0)
     teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         if self.read_num:
