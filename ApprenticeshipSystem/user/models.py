@@ -63,6 +63,9 @@ class Teacher(models.Model):
     def get_read_num(self):
         return self.readnum.read_num
 
+    def __repr__(self):
+        return self
+
     def __str__(self):
         if self.teacher_name:
             return self.teacher_name

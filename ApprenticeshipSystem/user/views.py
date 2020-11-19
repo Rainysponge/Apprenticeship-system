@@ -37,6 +37,7 @@ def register(request):
             teacher.save()
             student = Student.objects.create(user=user, student_name=nickname)
             student.save()
+            # read_name = ReadNum.objects.create(user=user, read_num=0, teacher=teacher)
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)

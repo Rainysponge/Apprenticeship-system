@@ -49,7 +49,7 @@
 
 <div class="container">
     {% if user.is_authenticated %}
-        {{ user.Profile.nickname }}!{{ user.get_school }}
+        {{ user.Profile.nickname }}!{{ user.get_school }}|{{ read_numlen }}
     {% else %}
 
     {% endif %}
@@ -71,7 +71,7 @@
                         {% endautoescape %}
 
                     </p>
-                    <a href="#" class="card-link">看看主页</a>
+                    <a href="{% url 'teacher_info_outside' readnum.user.pk %}" class="card-link">看看主页</a>
               </div>
             </div>
           </div>

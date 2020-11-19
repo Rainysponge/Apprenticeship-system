@@ -16,15 +16,21 @@ def home(request):
     hot_read_nums = []
     hot_teachers = []
     # hot_users = []
-
-    for i in range(0, 3):
-        hot_read_nums.append(read_nums[i])
-        hot_teachers.append(teachers[i])
-        # hot_users.append(user[i])
+    len_read_num = len(read_nums)
+    if len_read_num < 3:
+        for i in range(len_read_num):
+            hot_read_nums.append(read_nums[i])
+            hot_teachers.append(teachers[i])
+    else:
+        for i in range(0, 3):
+            hot_read_nums.append(read_nums[i])
+            hot_teachers.append(teachers[i])
+            # hot_users.append(user[i])
     context = {}
     context['teachers'] = teachers
     context['read_nums'] = read_nums
     context['hot_read_nums'] = hot_read_nums
+    context['read_numlen'] = str(len(read_nums))
     # context['users'] = users
     context['hot_teachers'] = hot_teachers
     return render(request, 'index.html', context)

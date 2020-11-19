@@ -40,11 +40,12 @@ def teacher_info_outside(request, user_pk):
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
     user = get_object_or_404(User, pk=user_pk)
+    teacher = Teacher.objects.get(user=user)
 
     if ReadNum.objects.filter(user=user).count():
         readnum = ReadNum.objects.get(user=user)
     else:
-        readnum = ReadNum(teacher=user.teacher, user=user)
+        readnum = ReadNum(teacher=teacher, user=user)
     readnum.read_num += 1
     readnum.save()
 
