@@ -55,3 +55,13 @@ class Critic(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class Request(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
+    created_time = models.DateTimeField(auto_now_add=True)
+    result = models.IntegerField(default=0) #0表示请求中，1表示请求成功，2表示请求失败
+
+    def __str__(self):
+        return '<Profile: %s for %s>' % (self.user, self.teacher)

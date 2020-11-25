@@ -27,3 +27,8 @@ class BlogAdmin(admin.ModelAdmin):
 @admin.register(Critic)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('id', 'homework_id', 'content')
+
+
+@admin.register(Request)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'teacher', 'created_time', 'result')
