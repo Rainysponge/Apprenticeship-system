@@ -1,9 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.urls import reverse
+
 from comment.forms import CommentForm
-from user.models import Teacher, ReadNum
 from comment.models import Comment
-from .models import Homework
+from user.models import Teacher, ReadNum
+from .forms import ApprenticeForm
+from .models import Homework, ApprenticeRequest
 
 
 # Create your views here.
@@ -50,7 +54,7 @@ def teacher_info_outside(request, user_pk):
     readnum.save()
 
     context = {}
-    # context['user_outside'] = user_outside
+    context['user_out'] = user
     context['teacher'] = user.teacher
     return render(request, 'Apprenticeship/teacher_info_outside.html', context)
 
@@ -58,3 +62,41 @@ def teacher_info_outside(request, user_pk):
 def homework_list(request):
     context = {}
     return render(request, 'Apprenticeship/homework_list.html', context)
+
+
+def Apprentice_request(request, teacher_pk):
+    teacher = Teacher.objects.get(pk=teacher_pk)
+    user = request.user
+    if ApprenticeRequest.objects.filter(teacher=teacher, user=user, result=0).count() == 0:
+    # teacher = Teacher.objects.get(pk=teacher_pk)
+    # user = request.user
+        apprentice_request = ApprenticeRequest()
+        apprentice_request.user = user
+        apprentice_request.teacher = teacher
+        apprentice_request.result = 0
+        apprentice_request.save()
+    else:
+        pass    # 返回错误信息
+    # apprentice_form = ApprenticeForm(request.POST, user=request.user)
+    # data = {}
+    #
+    # if apprentice_form.is_valid():
+    #     # 检查通过，保存数据
+    #     apprentice = ApprenticeRequest()
+    #     apprentice.user = apprentice_form.cleaned_data['user']
+    #     apprentice.result = apprentice_form.cleaned_data['result']
+    #     apprentice.teacher = 1
+    #     apprentice.save()
+    #
+    #     # 返回数据
+    #     data['status'] = 'SUCCESS'
+    #     data['username'] = apprentice.user.username
+    #     data['apprentice_time'] = apprentice.created_time.strftime('%Y-%m-%d %H:%M:%S')
+    #     data['result'] = apprentice.result
+    # else:
+    #     # return render(request, 'error.html', {'message': apprentice_form.errors, 'redirect_to': referer})
+    #     data['status'] = 'ERROR'
+    #     data['message'] = list(apprentice_form.errors.values())[0][0]
+    # return JsonResponse(data)
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    return redirect(referer)

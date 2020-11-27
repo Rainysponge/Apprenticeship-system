@@ -11,19 +11,6 @@ from comment.forms import CommentForm
 
 def update_comment(request):
     comment_form = CommentForm(request.POST)
-    #user = request.user
-    #与前端交互
-    #text = request.POST.get('text', '')
-    # if text == '':
-    #     #return render(request, 'error.html', {'message：评论内容为空'})
-    # try:
-    #     object_id = int(request.POST.get('homework_id', ''))
-    # except Exceptionas as e:
-    #     # return render(request, 'error.html', {'message：评论对象不存在'})
-    #object_id = int(request.POST.get('homework_id', ''))
-
-
-    #cleaned_data 用于is_valid()后 判断django是否得到了干净的数据
     if comment_form.is_valid():
         comment = Comment()
         comment.user = request.user

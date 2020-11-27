@@ -29,6 +29,6 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ('id', 'homework_id', 'content')
 
 
-@admin.register(Request)
+@admin.register(ApprenticeRequest)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'teacher', 'created_time', 'result')

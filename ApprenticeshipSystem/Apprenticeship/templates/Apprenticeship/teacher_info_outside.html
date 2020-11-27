@@ -44,14 +44,18 @@
 
                         {% csrf_token %}
                         <textarea class="form-control" id="comment_text" name="text" rows="3"></textarea>
-                        <input type="hidden" name="object_id" value="#">
+                        <input type="hidden" name="object_id" value="{{ user_pk }}">
                         <input type="hidden" name="content_type" value="#">
                         <br>
                         <button type="submit" class="btn btn-info">提交评论</button>
                     </form>
 
-                    <form action=# method="POST" style="overflow:hidden">
-                        <input type="submit" value="申请拜师" class="btn btn-primary">
+                    <form action="{% url 'Apprentice_request' teacher.pk %}" method="POST" style="overflow:hidden">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="use" value="#">
+                        <button type="submit" class="btn btn-info">申请拜师</button>
+
                     </form>
 {#                {% else %}#}
 {#                    尚未登录，登录之后方可评论#}

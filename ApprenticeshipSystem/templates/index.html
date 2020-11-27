@@ -76,7 +76,9 @@
             </div>
           </div>
         {% empty %}
-            暂无热门教师
+            <script>
+                window.location.replace("{% url 'home' %}");
+            </script>
         {% endfor %}
 
     <hr>
