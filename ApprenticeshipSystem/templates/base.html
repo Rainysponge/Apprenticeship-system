@@ -69,6 +69,9 @@ footer{
             <li class="nav-item">
                 <a class="nav-link {% block homeworkActive %}{% endblock %}" href="{% url 'homework_detail' %}">作业列表<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {% block ApprenticeActive %}{% endblock %}" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>
+            </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action3</a>

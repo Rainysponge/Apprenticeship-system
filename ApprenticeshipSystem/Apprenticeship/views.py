@@ -5,9 +5,9 @@ from django.urls import reverse
 
 from comment.forms import CommentForm
 from comment.models import Comment
-from user.models import Teacher, ReadNum
+from user.models import Teacher, ReadNum, Student
 from .forms import ApprenticeForm
-from .models import Homework, ApprenticeRequest
+from .models import Homework, ApprenticeRequest, Relationship
 
 
 # Create your views here.
@@ -98,5 +98,47 @@ def Apprentice_request(request, teacher_pk):
     #     data['status'] = 'ERROR'
     #     data['message'] = list(apprentice_form.errors.values())[0][0]
     # return JsonResponse(data)
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    return redirect(referer)
+
+
+def Apprentice_detail(request):
+    user = request.user
+    # fliter返回集合不能作为查询，只能用get
+    teacher = Teacher.objects.get(user=user)
+    apprentice_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=0)
+    my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
+
+    context = {}
+    context['apprentice_requests'] = apprentice_requests
+    # 为什么前端可以user.student？？
+    context['my_students_requests'] = my_students_requests
+    return render(request, 'Apprenticeship/Apprentice_detail.html', context)
+
+
+def Apprentice_agree(request, requirement_pk):
+    # user = request.user
+    # student = Student.objects.get(user=user)
+    requirement = ApprenticeRequest.objects.get(pk=requirement_pk)
+    requirement.result = 1
+    requirement.save()
+
+    # relationship = Relationship()
+    # relationship.SID = user
+
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
+    return redirect(referer)
+
+
+def Apprentice_refuse(request, requirement_pk):
+    # user = request.user
+    # student = Student.objects.get(user=user)
+    requirement = ApprenticeRequest.objects.get(pk=requirement_pk)
+    requirement.result = 2
+    requirement.save()
+
+    # relationship = Relationship()
+    # relationship.SID = user
+
     referer = request.META.get('HTTP_REFERER', reverse('home'))
     return redirect(referer)
