@@ -4,39 +4,128 @@
 
 {% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
 
-{% block ApprenticeActive %}active{% endblock %}
+<!-- {% block ApprenticeActive %}active{% endblock %} -->
 {% block content %}
     <br>
     <br>
-    {% for apprentice_request in apprentice_requests %}
-        <p>{{ apprentice_request.user.student.student_name  }}请求拜你为师</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row row-cols-3">
+                        <!-- <div class="col">
+                            1
+                        </div>
+                        <div class="col">
+                            2
+                        </div>
+                        <div class="col">
+                            3
+                        </div> -->
 
-        <form action="{% url 'Apprentice_agree' apprentice_request.pk %}" method="POST" style="overflow:hidden">
-            {# {{ apprentice_request.pk }} #}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-success">同意</button>
-        </form>
+                        {% for apprentice_request in apprentice_requests %}
+                        <div class="col">
+                            <p>有未处理的拜师请求</p>
+                            <div class="card" style="width: 15rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ apprentice_request.user.student.student_name  }}拜师请求</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ apprentice_request.created_time|date:"Y-m-d H:i:s"  }}</h6>
+                                    <p class="card-text">
+                                        {% if apprentice_request.user.student.help %}
+                                            {{ apprentice_request.user.student.help  }}
+                                        {% else %}
+                                            Can I bug you?
+                                        {% endif %}
+                                    </p>
+                                    <table>
+                                        <tr>
+                                         <td>
+                                            <form action="{% url 'Apprentice_agree' apprentice_request.pk %}" method="POST" style="overflow:hidden">
+                                                <!-- {# {{ apprentice_request.pk }} #} -->
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-success" onclick="apprenticeAgree()">同意</button>
+                                            </form>
+                                         </td>
+                                         <td>
+                                            <form action="{% url 'Apprentice_refuse' apprentice_request.pk %}" method="POST" style="overflow:hidden">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-info" onclick="apprenticeRefuse()">拒绝</button>
+                                            </form>
+                                         </td>
+                                        </tr>
+                                       </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    <script>
+                        console.log(apprentice_request);
+                    </script>
+                {% empty %}
+                    <div class="col"></div>
+                    <div class="waitForMassage" style="text-align: center;">
+                        <p>在原地，等待，一个拜师消息=）</p>
+                        <img src="/media/waitForMassage.jpg" alt="" height="500" width="350">
+                        
+                    </div>
+                <!-- <div class="col-md-4">
+                    
+                </div> -->
+                        
+                {% endfor %}
+                        
+                    </div>
+                        
+                </div>
+                
+                
+            </div>
+            <div class="col-md-4">
+                <!-- <h3>已有学生</h3> -->
+                    <!-- <br> -->
+                    <ul class="list-group">
+                        <li class="list-group-item"><h3>学生列表</h3></li>
+                        {% for my_students_request in my_students_requests %}
+                            
+                            {% if my_students_request.user.student.student_name %}
+                            <!-- {% autoescape off %} 
+                                学生自我介绍： {{  my_students_request.user.student.self_introduction }}
+                            {% endautoescape %} -->
+                                <li class="list-group-item list-group-item-info">
+                                    {{ my_students_request.user.student.student_name }}
+                                </li>
+                            <!-- <br> -->
+                            {% else %}
+                            {% endif %}
+                        {% empty %}
+                            <li class="list-group-item list-group-item-warning">暂时还没有徒弟哦~</li>
+                        {% endfor %}
 
-        <form action="{% url 'Apprentice_refuse' apprentice_request.pk %}" method="POST" style="overflow:hidden">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-info">拒绝</button>
-        </form>
-
-        <hr>
-    {% empty %}
-            <h3>---暂无拜师请求---</h3>
-    {% endfor %}
+                        
+                        <!-- <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
+                        <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
+                        <li class="list-group-item list-group-item-success">A simple success list group item</li>
+                        <li class="list-group-item list-group-item-danger">A simple danger list group item</li>
+                        <li class="list-group-item list-group-item-warning">A simple warning list group item</li> -->
+                        
+                        <!-- <li class="list-group-item list-group-item-light">A simple light list group item</li>
+                        <li class="list-group-item list-group-item-dark">A simple dark list group item</li> -->
+                      </ul>
+                    
+            </div>
+        </div>
+    </div>
+    
     <br>
     <hr>
-    <h3>已有学生</h3>
-    <br>
-    {% for my_students_request in my_students_requests %}
-        学生姓名：{{ my_students_request.user.student.student_name }}<br>
-        {% autoescape off %} 学生自我介绍： {{  my_students_request.user.student.self_introduction }} {% endautoescape %}
-        <br>
-    {% empty %}
-            <h3>---快去收点徒弟吧---</h3>
-    {% endfor %}
-
+    <script>
+        function apprenticeAgree(){
+            alert('恭喜获得新徒弟');
+        }
+        function apprenticeRefuse(){
+            alert('真是遗憾!');
+        }
+    </script>
 
 {% endblock %}

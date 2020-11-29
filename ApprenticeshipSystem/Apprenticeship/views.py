@@ -66,6 +66,7 @@ def homework_list(request):
 
 def Apprentice_request(request, teacher_pk):
     teacher = Teacher.objects.get(pk=teacher_pk)
+    # if request.user.is_authenticated():
     user = request.user
     if ApprenticeRequest.objects.filter(teacher=teacher, user=user, result=0).count() == 0:
     # teacher = Teacher.objects.get(pk=teacher_pk)
@@ -76,7 +77,12 @@ def Apprentice_request(request, teacher_pk):
         apprentice_request.result = 0
         apprentice_request.save()
     else:
-        pass    # 返回错误信息
+        pass
+        # data = {}
+        # data['ErrorMassage'] = "似乎出错了"
+        # return JsonResponse(data)    # 返回错误信息
+    # else:
+    #     pass
     # apprentice_form = ApprenticeForm(request.POST, user=request.user)
     # data = {}
     #

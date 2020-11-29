@@ -66,12 +66,18 @@ footer{
             <li class="nav-item">
                 <a class="nav-link {% block TeaActive %}{% endblock %}" href="{% url 'teacher_list' %}">师傅列表<span class="sr-only">(current)</span></a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link {% block homeworkActive %}{% endblock %}" href="{% url 'homework_detail' %}">作业列表<span class="sr-only">(current)</span></a>
             </li>
+            <!-- {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link {% block ApprenticeActive %}{% endblock %}" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>
             </li>
+            {% else %}
+            
+            {% endif %} -->
+            
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action3</a>
@@ -101,6 +107,9 @@ footer{
 
                             <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>
                             <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">个人中心</a>
+                            
+                            <a class="dropdown-item" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>
+                            
                             {% if user.is_staff %}
                             <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>
                                 <script>
@@ -138,12 +147,12 @@ footer{
 
     </main>
     <footer class="footer mt-auto py-3">
-    <div class="container">
-{#        <span class="text-muted">© Company 2020 成员：池诗玥 马志濠 胡展翊 沈鑫 刘廷杰</span>#}
-    </div>
+    <!-- <div class="container"> -->
+<!-- {#        <span class="text-muted">© Company 2020 成员：池诗玥 马志濠 胡展翊 沈鑫 刘廷杰</span>#} -->
+    <!-- </div> -->
     </footer>
 
-    <script src="{% static "jquery-3.5.1.slim.min.js" %}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="{% static "bootstrap-4.5.0-dist/js/bootstrap.js" %}" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{% static 'jquery-3.5.1.slim.min.js' %}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap-4.5.0-dist/js/bootstrap.js' %}" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>
