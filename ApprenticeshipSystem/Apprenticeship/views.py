@@ -78,32 +78,7 @@ def Apprentice_request(request, teacher_pk):
         apprentice_request.save()
     else:
         pass
-        # data = {}
-        # data['ErrorMassage'] = "似乎出错了"
-        # return JsonResponse(data)    # 返回错误信息
-    # else:
-    #     pass
-    # apprentice_form = ApprenticeForm(request.POST, user=request.user)
-    # data = {}
-    #
-    # if apprentice_form.is_valid():
-    #     # 检查通过，保存数据
-    #     apprentice = ApprenticeRequest()
-    #     apprentice.user = apprentice_form.cleaned_data['user']
-    #     apprentice.result = apprentice_form.cleaned_data['result']
-    #     apprentice.teacher = 1
-    #     apprentice.save()
-    #
-    #     # 返回数据
-    #     data['status'] = 'SUCCESS'
-    #     data['username'] = apprentice.user.username
-    #     data['apprentice_time'] = apprentice.created_time.strftime('%Y-%m-%d %H:%M:%S')
-    #     data['result'] = apprentice.result
-    # else:
-    #     # return render(request, 'error.html', {'message': apprentice_form.errors, 'redirect_to': referer})
-    #     data['status'] = 'ERROR'
-    #     data['message'] = list(apprentice_form.errors.values())[0][0]
-    # return JsonResponse(data)
+        
     referer = request.META.get('HTTP_REFERER', reverse('home'))
     return redirect(referer)
 
@@ -114,12 +89,41 @@ def Apprentice_detail(request):
     teacher = Teacher.objects.get(user=user)
     apprentice_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=0)
     my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
+    response_list = ApprenticeRequest.objects.filter(user=user)
+    # waiting_response = ApprenticeRequest.objects.filter(user=user, result=0)
+    # isRefused_response = ApprenticeRequest.objects.filter(user=user, result=2)
+    
+    # my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
 
     context = {}
+    context['response_list'] = response_list
+    # context['waiting_response'] = waiting_response
+    # context['isRefused_response'] = isRefused_response
     context['apprentice_requests'] = apprentice_requests
     # 为什么前端可以user.student？？
-    context['my_students_requests'] = my_students_requests
+    context['my_students_requests'] = my_students_requests[0:4]
+    context['my_students_nums'] = len(my_students_requests)
     return render(request, 'Apprenticeship/Apprentice_detail.html', context)
+
+
+# def Apprentice_response(request):
+#     user = request.user
+    
+#     success_response = ApprenticeRequest.objects.filter(user=user, result=1)
+#     waiting_response = ApprenticeRequest.objects.filter(user=user, result=0)
+#     isRefused_response = ApprenticeRequest.objects.filter(user=user, result=2)
+    
+#     # my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
+
+#     context = {}
+#     context['success_response'] = success_response
+#     context['waiting_response'] = waiting_response
+#     context['isRefused_response'] = isRefused_response
+
+#     return render(request, 'Apprenticeship/ApprenticeResponse.html', context)
+
+
+
 
 
 def Apprentice_agree(request, requirement_pk):

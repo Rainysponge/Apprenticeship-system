@@ -3,7 +3,10 @@
 {% block title %}未来学生{% endblock %}
 
 {% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
+{% block bodyBack %}
+<body class="bg-light" style="background-image:url('/media/apprentice_bg.jpg');background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed; ">
 
+{% endblock %}
 <!-- {% block ApprenticeActive %}active{% endblock %} -->
 {% block content %}
     <br>
@@ -95,9 +98,19 @@
                                 <li class="list-group-item list-group-item-info">
                                     {{ my_students_request.user.student.student_name }}
                                 </li>
+                                
                             <!-- <br> -->
                             {% else %}
+                            <li class="list-group-item list-group-item-info">
+                                一个不愿意透露姓名的学生
+                            </li>
+
                             {% endif %}
+                            
+                            {% if my_students_nums > 4 %}
+                                <li class="list-group-item list-group-item-secondary">......</li>
+                            {% endif %}
+                            
                         {% empty %}
                             <li class="list-group-item list-group-item-warning">暂时还没有徒弟哦~</li>
                         {% endfor %}
@@ -112,7 +125,45 @@
                         <!-- <li class="list-group-item list-group-item-light">A simple light list group item</li>
                         <li class="list-group-item list-group-item-dark">A simple dark list group item</li> -->
                       </ul>
-                    
+                      <hr>
+                      <ul class="list-group">
+                        <li class="list-group-item"><h3>收到的回复</h3></li>
+                            {% for response in response_list %}
+                                {% if response.result == 1 %}
+                                    <li class="list-group-item list-group-item-success" v-bind:title="message">
+                                        {{ response.teacher.teacher_name }}同意了拜师请求！
+                                    </li>
+                                    
+                                    
+                                {% endif %}
+                                {% if response.result == 0 %}
+                                    <li class="list-group-item list-group-item-light" v-bind:title="message">
+                                        {{ response.teacher.teacher_name }}还未回复
+                                    </li>
+                                    
+                                    
+                                {% endif %}
+                                {% if response.result == 2 %}
+                                    <li class="list-group-item list-group-item-danger" v-bind:title="message">
+                                        {{ response.teacher.teacher_name }}婉拒了拜师请求！
+                                    </li>
+                                    
+                                    
+                                {% endif %}
+
+                                <!-- {% if response.result == 1 %}
+                                    <li class="list-group-item list-group-item-warning">A simple warning list group item</li>
+                                {% endif %} -->
+                            
+                            
+                            
+                            
+                            {% empty %}
+                            {% endfor %}
+
+                      </ul>
+                      
+                      
             </div>
         </div>
     </div>
@@ -126,6 +177,9 @@
         function apprenticeRefuse(){
             alert('真是遗憾!');
         }
+        console.log('{{ my_students_nums }}');
+        
+        
     </script>
 
 {% endblock %}
