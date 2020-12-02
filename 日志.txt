@@ -140,3 +140,8 @@ auth:胡展翊
 
 (高阶需求：需要一个会PS的人)
 auth:胡展翊
+
+20_12_1
+师傅评论。后期可以将comment改成contenttype。
+settings中可以对富文本框大小进行更改。
+auth:吴一楠

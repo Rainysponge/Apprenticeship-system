@@ -6,3 +6,8 @@ from ckeditor.widgets import CKEditorWidget
 class CommentForm(forms.Form):
     homework_id = forms.IntegerField(widget=forms.HiddenInput)
     text = forms.CharField(widget=CKEditorWidget())
+
+
+class Teacher_CommentForm(forms.Form):
+    teacher_id = forms.IntegerField(widget=forms.HiddenInput)
+    text = forms.CharField(widget=CKEditorWidget()) # config_name='teacher_comment_ckeditor')

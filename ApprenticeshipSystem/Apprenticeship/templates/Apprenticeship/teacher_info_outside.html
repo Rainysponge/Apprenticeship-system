@@ -2,6 +2,10 @@
 {% block title %}__未定___{% endblock %}
 {% load staticfiles %}
 
+{% block header_extends %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
 <!-- context['user_out'] = user
 context['teacher'] = user.teacher -->
 
@@ -82,16 +86,24 @@ context['teacher'] = user.teacher -->
                         </table>
                     </div>
                 </div>
-                    <form action="#" method="post">
+                    <br>
+                    <h3 class="commet-area-title" style="border-bottom: 1px solid #ccc;padding-bottom: 0.4em;text-align: center;">
+                        你的留言
+                    </h3>
+                    <form action="{% url 'update_teacher_comment' %}" method="post">
 
                         {% csrf_token %}
-                        <textarea class="form-control" id="comment_text" name="text" rows="3"></textarea>
-                        <input type="hidden" name="object_id" value="{{ user_pk }}">
-                        <input type="hidden" name="content_type" value="#">
+                        {% for field in teacher_comment_form %}
+                            {{ field }} {# 去除标签text #}
+                        {% endfor %}
+                        {# <textarea class="form-control" id="comment_text" name="text" rows="3"></textarea>    #}
+                        {# <input type="hidden" name="object_id" value="{{ user_pk }}"> #}
+                        {# <input type="hidden" name="content_type" value="#">  #}
                         <br>
-                        <div class="divForButton" style="text-align: right;">
-                            <button type="submit" class="btn btn-info">提交评论</button>
-                        </div>
+                         <input type="submit" value="评论" class="btn btn-info">
+                        {# <div class="divForButton" style="text-align: right;">        #}
+                         {#   <button type="submit" class="btn btn-info">提交评论</button>  #}
+                       {#  </div>       #}
                         
                     </form>
             </div>

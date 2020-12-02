@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.urls import reverse
 
-from comment.forms import CommentForm
-from comment.models import Comment
+from comment.forms import CommentForm, Teacher_CommentForm
+from comment.models import Comment, Teacher_Comment
 from user.models import Teacher, ReadNum, Student
 from .forms import ApprenticeForm
 from .models import Homework, ApprenticeRequest, Relationship
@@ -44,7 +44,8 @@ def teacher_info_outside(request, user_pk):
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
     user = get_object_or_404(User, pk=user_pk)
-    teacher = Teacher.objects.get(user=user)
+    teacher = Teacher.objects.get(user=user)    # 被评论的对象
+    comments = Teacher_Comment.objects.filter(content_object=teacher)
 
     if ReadNum.objects.filter(user=user).count():
         readnum = ReadNum.objects.get(user=user)
@@ -53,7 +54,10 @@ def teacher_info_outside(request, user_pk):
     readnum.read_num += 1
     readnum.save()
 
+    data = {'teacher_id': teacher.id}
     context = {}
+    context['comments'] = comments
+    context['teacher_comment_form'] = Teacher_CommentForm(initial=data)
     context['user_out'] = user
     context['teacher'] = user.teacher
     return render(request, 'Apprenticeship/teacher_info_outside.html', context)
