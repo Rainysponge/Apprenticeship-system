@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .forms import LoginFrom, RegForm
 from user.models import Teacher, ReadNum, Profile
+from Apprenticeship.models import ApprenticeRequest
 
 
 def home(request):
@@ -11,7 +12,9 @@ def home(request):
     # for i in range(0, 3):
     #     hot_teachers.append(teachers[i])
     # users = User.objects.all().order_by('-')
-
+    # user = request.user
+    # userTeacher = user.teacher
+    # require_count = ApprenticeRequest.objects.filter(teacher=userTeacher)
     read_nums = ReadNum.objects.all().order_by('-read_num')
     hot_read_nums = []
     hot_teachers = []
@@ -27,6 +30,7 @@ def home(request):
             hot_teachers.append(teachers[i])
             # hot_users.append(user[i])
     context = {}
+    # context['require_count'] = require_count
     context['teachers'] = teachers
     context['read_nums'] = read_nums
     context['hot_read_nums'] = hot_read_nums

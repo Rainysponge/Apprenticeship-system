@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}{{student.student_name}}信息{% endblock %}
+{% load staticfiles %}
+
+{% block header_extends %}
+    <!-- <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script> -->
+    <style>
+        .divForButton{
+            text-align: right;
+        }
+    </style>
+{% endblock %}
+<!-- context['user_out'] = user
+context['student'] = user.student -->
+
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="commet-area-title" style="text-align: center;border-bottom: 1px solid #ccc;padding-bottom: 0.4em">学生自我简介</h3>
+                {% if student.self_introduction %}
+                
+                    <p aligin="left">
+                    
+                        {% autoescape off %}
+
+                        {{ student.self_introduction }}
+
+                        {% endautoescape %}
+                    </p>
+                {% else %}
+                <p aligin="left">
+                    
+                    他很神秘,什么也没留下!
+                </p>
+                {% endif %}
+                <!-- <hr> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-dm-4">
+                            <ul class="list-group">
+                                <li class="list-group-item"><h5>他的师傅们</h5></li>
+                                {% for item in teacherList %}
+                                    
+                                    {% if item.teacher.teacher_name %}
+                                    
+                                        <li class="list-group-item list-group-item-info">
+                                            {{ item.teacher.teacher_name }}
+                                        </li>
+                                        
+                                    <!-- <br> -->
+                                    {% else %}
+                                    <li class="list-group-item list-group-item-info">
+                                        一个不愿意透露姓名的老师
+                                    </li>
+        
+                                    {% endif %}
+                                    
+                                    {% if my_students_nums > 4 %}
+                                        <li class="list-group-item list-group-item-secondary">......</li>
+                                    {% endif %}
+                                    
+                                {% empty %}
+                                    <li class="list-group-item list-group-item-warning">暂时还没有师傅</li>
+                                {% endfor %}
+                              </ul>
+                        </div>
+                        <div class="col-md-9">
+                            <h3 class="commet-area-title" style="text-align: center;border-bottom: 1px solid #ccc;padding-bottom: 0.4em">作业或问题</h3>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ user_out.Profile.photo_resize_url }}"height="208" width="74" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title" style="text-align: center;" >{{ student.student_name }}的学生卡片</h5>
+                      {% if student.help %}
+                        <p class="card-text">需要{{ student.help }}这些方面的帮助</p>
+                      {% else %}
+                        <p class="card-text">我很强！！！</p>
+                      {% endif %}
+                      
+                      
+                      
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <!-- <li class="list-group-item">{{ user_out.Profile.school }}</li> -->
+                        <li class="list-group-item">{{ user_out.Profile.school }}</li>
+                        <li class="list-group-item">{{ user_out.Profile.grade }}</li>
+                        <li class="list-group-item">{{ user_out.Profile.major }}</li>
+                    </ul>
+                    
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        const test = window.location.href;
+        const e = test.split('/');
+        const l = e.length;
+
+        // {#console.log('{{ user.Profile.photo_resize_url }}');#}
+        //console.log(e);
+        //console.log(l);
+        //console.log(e[5]);
+
+        if ({{ user.teacher.pk }} == e[5]){
+            console.log("TRUE");
+
+        }else{
+            console.log("False");
+            console.log({{ user.teacher.pk }});
+            alert("这是别人的de私人信息哦~");
+
+        function JumpToHome()
+        {
+            window.location.href="{% url 'home' %}";
+        }
+
+        setTimeout(JumpToHome, 0);
+        }
+
+    </script> -->
+{% endblock %}

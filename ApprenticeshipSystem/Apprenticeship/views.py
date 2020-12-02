@@ -63,6 +63,22 @@ def teacher_info_outside(request, user_pk):
     return render(request, 'Apprenticeship/teacher_info_outside.html', context)
 
 
+
+def student_info_outside(request, user_pk):
+    # user_outside = User.objects.filter(pk=user_pk).first()
+    # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
+    user = get_object_or_404(User, pk=user_pk)
+    student = Student.objects.get(user=user)    # 被评论的对象
+    teacherList = ApprenticeRequest.objects.filter(user=user)
+    context = {}
+    # context['comments'] = comments
+    # context['teacher_comment_form'] = Teacher_CommentForm(initial=data)
+    context['teacherList'] = teacherList
+    context['user_out'] = user
+    context['student'] = user.student
+    return render(request, 'Apprenticeship/student_info_outside.html', context)
+
+
 def homework_list(request):
     context = {}
     return render(request, 'Apprenticeship/homework_list.html', context)

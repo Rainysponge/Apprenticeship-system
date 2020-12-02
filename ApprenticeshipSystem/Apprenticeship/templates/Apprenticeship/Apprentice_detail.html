@@ -4,7 +4,7 @@
 
 {% block header_extends %}<!--这里放每个文件对应的CSS路径-->{% endblock %}
 {% block bodyBack %}
-<body class="bg-light" style="background-image:url('/media/apprentice_bg.jpg');background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed; ">
+<body class="bg-light" style="background-image:url('/media/apprentice_bg.jpg');background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
 
 {% endblock %}
 <!-- {% block ApprenticeActive %}active{% endblock %} -->
@@ -92,11 +92,12 @@
                         {% for my_students_request in my_students_requests %}
                             
                             {% if my_students_request.user.student.student_name %}
-                            <!-- {% autoescape off %} 
-                                学生自我介绍： {{  my_students_request.user.student.self_introduction }}
-                            {% endautoescape %} -->
+                            
                                 <li class="list-group-item list-group-item-info">
-                                    {{ my_students_request.user.student.student_name }}
+                                    <a href="{% url 'student_info_outside' my_students_request.user.pk %}" >
+                                        {{ my_students_request.user.student.student_name }}
+                                    </a>
+                                    
                                 </li>
                                 
                             <!-- <br> -->
