@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.urls import reverse
-
+from django.core.paginator import Paginator
 from comment.forms import CommentForm, Teacher_CommentForm
 from comment.models import Comment, Teacher_Comment
 from user.models import Teacher, ReadNum, Student
@@ -17,9 +17,15 @@ def teacher_list(request):
     Teacher_list = Teacher.objects.all()
     users = User.objects.all()
     # profile = Profile.objects.all()
+
+    paginator = Paginator(users, 5)  # 每10页进行分页
+    page_num = request.GET.get('page', 1)
+    page_of_teachers = paginator.get_page(page_num)
+
     context = {}
     context['teacher_list'] = Teacher_list
     context['users'] = users
+    context['page_of_teachers'] = page_of_teachers
     # context['profile'] = profile
 
     return render(request, 'Apprenticeship/teacher_list.html', context)
@@ -28,7 +34,7 @@ def teacher_list(request):
 def homework_detail(request):
     homework1 = get_object_or_404(Homework, pk=1)
     # comments = Comment.objects.filter(pk=1)
-    comments = Comment.objects.all()
+    comments = comment.objects.all()
 
     context = {}
     context['user'] = request.user
