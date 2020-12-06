@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import auth
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Major
 
 
 class LoginFrom(forms.Form):
@@ -101,6 +101,11 @@ class RegForm(forms.Form):
 
 
 class changeProfileInfoForm(forms.Form):
+    major_list = Major.objects.all()
+    MAJOR = []
+    for item in major_list:
+        MAJOR.append([item, item.major])
+    major = forms.ChoiceField(label='专业', choices=MAJOR)
     GRADE = [
         ['大一', '大一'],
         ['大二', '大二'],
@@ -108,10 +113,14 @@ class changeProfileInfoForm(forms.Form):
         ['大四', '大四']
     ]
     grade = forms.ChoiceField(label='年级', choices=GRADE)
-    portrait = forms.ImageField(label='头像', help_text='不能超过5M!')
+    # portrait = forms.ImageField(label='头像', help_text='不能超过5M!')
     school = forms.CharField(label='学校',
                              max_length=30, min_length=2,
                              widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))
+
+
+class changePortrait(forms.Form):
+    portrait = forms.ImageField(label='头像', help_text='不能超过5M!')
 
 
 class changeTeacherInfoForm(forms.Form):

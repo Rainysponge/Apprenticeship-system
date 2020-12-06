@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
-from .models import Profile, Teacher, Student, ReadNum
-from .forms import RegForm, LoginFrom, changeProfileInfoForm
+from .models import Profile, Teacher, Student, ReadNum, Major
+from .forms import RegForm, LoginFrom, changeProfileInfoForm, changePortrait
 from Apprenticeship.models import Homework
 from comment.models import Comment
 from comment.forms import CommentForm
@@ -85,22 +85,33 @@ def teacher_info(request, teacher_pk):
 
 
 def changeProfileInfo(request, profile_pk):
+    change_form = changeProfileInfoForm(request.POST)
+    changeprotrait_form = changePortrait(request.POST, request.FILES)
     if request.method == 'POST':
-        change_form = changeProfileInfoForm(request.POST, request.FILES)
+
+        profile = Profile.objects.get(pk=profile_pk)
         if change_form.is_valid():
-            profile = Profile.objects.get(pk=profile_pk)
+            # profile = Profile.objects.get(pk=profile_pk)
             profile.grade = change_form.cleaned_data['grade']
             profile.school = change_form.cleaned_data['school']
-            profile.portrait = request.FILES['portrait']
-
+            # profile.portrait = request.FILES['portrait']
+            major = change_form.cleaned_data['major']
+            majorO = Major.objects.get(major=major)
+            profile.major = majorO
             profile.save()
-
-            return render(request, 'index.html', {'massage': '基础信息已经更改'})
+            context = {'massage': '基础信息已经更改', 'a': 1}
+            return render(request, 'index.html', context)
+        if changeprotrait_form.is_valid():
+            profile.portrait = request.FILES['portrait']
+            profile.save()
+            context = {'massage': '基础信息已经更改', 'a': 1}
+            return render(request, 'index.html', context)
     else:
         change_form = changeProfileInfoForm()
 
     context = {}
     context['change_form'] = change_form
     context['form_title'] = '更改基础信息'
+    context['changeprotrait_form'] = changeprotrait_form
     # context['ruser'] = str(request.user.username)
     return render(request, 'user/changeProfileInfo.html', context)
