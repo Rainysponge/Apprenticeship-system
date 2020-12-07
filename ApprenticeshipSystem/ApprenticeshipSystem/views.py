@@ -8,13 +8,7 @@ from Apprenticeship.models import ApprenticeRequest
 
 def home(request):
     teachers = Teacher.objects.all().order_by('-readnum__read_num')
-    # hot_teachers = []
-    # for i in range(0, 3):
-    #     hot_teachers.append(teachers[i])
-    # users = User.objects.all().order_by('-')
-    # user = request.user
-    # userTeacher = user.teacher
-    # require_count = ApprenticeRequest.objects.filter(teacher=userTeacher)
+
     read_nums = ReadNum.objects.all().order_by('-read_num')
     hot_read_nums = []
     hot_teachers = []

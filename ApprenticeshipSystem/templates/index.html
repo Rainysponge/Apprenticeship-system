@@ -66,19 +66,25 @@
               <div class="card-body">
                     <p class="card-text">
                         {{ readnum.teacher.teacher_name }}:
+                  <hr>
                         {% autoescape off %}
-                            <p>擅长：{{ readnum.teacher.skill }}</p>
+                            擅长：{{ readnum.teacher.skill }}
                         {% endautoescape %}
 
                     </p>
-                    <a href="{% url 'teacher_info_outside' readnum.user.pk %}" class="card-link">看看主页</a>
+                    <button href="{% url 'teacher_info_outside' readnum.user.pk %}" class="btn btn-info btn-lg btn-block">看看主页</button>
               </div>
             </div>
           </div>
         {% empty %}
-            <script>
-                window.location.replace("{% url 'home' %}");
-            </script>
+
+            <p>
+                暂无师傅信息
+            </p>
+
+{#            <script>#}
+{#                window.location.replace("{% url 'home' %}");#}
+{#            </script>#}
         {% endfor %}
 
     <hr>
@@ -86,19 +92,23 @@
 
 
   </div>
+</div>
         <script>
-            var massage = "{{ massage }}";
+            console.log('{{ massage }}');
             //判断如果massage是否为空
             console.log('{{ log_massage }}');
-            if (massage.length != 0){
+            if('{{ massage }}'){
                 alert('{{ massage }}');
-                //console.log('{{ massage }}');
-            }else{
-                console.log("ereHegassaM!toNsIerehT")
-                //ThereIsNotMassageHere
             }
 
-        </script>
 
+        </script>
+        {% for readnum in hot_read_nums %}
+        {% empty %}
+            <script>
+                window.location.replace("{% url 'home' %}");
+            </script>
+
+        {% endfor %}
 
 {% endblock content %}

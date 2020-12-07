@@ -1,13 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile, Teacher, Student, ReadNum, Major
 from .forms import RegForm, LoginFrom, changeProfileInfoForm, changePortrait
-from Apprenticeship.models import Homework
-from comment.models import Comment
-from comment.forms import CommentForm
-from .tools import user_directory_path
 
 
 # Create your views here.
@@ -41,7 +38,7 @@ def register(request):
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
-            return render(request, 'index.html', {'massage': '恭喜你已经成功注册啦，赶紧登录试试吧！'})
+            return render(request, 'index.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！'})
     else:
         reg_form = RegForm()
 
@@ -57,7 +54,9 @@ def login(request):
         if login_form.is_valid():
             user = login_form.cleaned_data['user']
             auth.login(request, user)
+
             context = {'log_massage': request.GET.get('from')}
+            context['massage'] = '登陆成功'
             # return redirect(request.GET.get('from', reverse('home')))
             return render(request, 'index.html', context)
     else:

@@ -17,7 +17,7 @@ def teacher_list(request):
     Teacher_list = Teacher.objects.all()
     users = User.objects.all()
     # profile = Profile.objects.all()
-
+    # type_users = type(users)
     paginator = Paginator(users, 5)  # 每10页进行分页
     page_num = request.GET.get('page', 1)
     page_of_teachers = paginator.get_page(page_num)
@@ -25,6 +25,7 @@ def teacher_list(request):
     context = {}
     context['teacher_list'] = Teacher_list
     context['users'] = users
+    # context['type_users'] = type_users
     context['page_of_teachers'] = page_of_teachers
     # context['profile'] = profile
 
@@ -34,7 +35,7 @@ def teacher_list(request):
 def homework_detail(request):
     homework1 = get_object_or_404(Homework, pk=1)
     # comments = Comment.objects.filter(pk=1)
-    comments = comment.objects.all()
+    comments = Comment.objects.all()
 
     context = {}
     context['user'] = request.user

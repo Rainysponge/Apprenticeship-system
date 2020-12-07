@@ -53,15 +53,10 @@
     {% endif %}
 
     <script>
-        const test = window.location.href;
-        const e = test.split('/');
-        const l = e.length;
-        {#var t = {{ ruser }}#}
-        {#console.log({{ ruser }})#}
-        {#console.log(e);#}
-        {#console.log(l);#}
-        {#console.log(e[5]);#}
-        {#console.log({{ user.Profile.pk }});#}
+        var test = window.location.href;
+        var e = test.split('/');
+        var l = e.length;
+
         if ({{ user.Profile.pk }} == e[5]){
             console.log("%12*jsnfhjk&&8jjn*");
 
@@ -69,12 +64,12 @@
             console.log("0sj2**2%76pp)");
             alert("请不要修改别人的信息哦~");
 
-        function JumpToHome()
-        {
-            window.location.href="{% url 'home' %}";
-        }
+            function JumpToHome()
+            {
+                window.location.href="{% url 'home' %}";
+            }
 
-        setTimeout(JumpToHome,1000);
+            setTimeout(JumpToHome,1000);
         }
 
     </script>
