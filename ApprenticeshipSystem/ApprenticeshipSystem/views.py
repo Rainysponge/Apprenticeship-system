@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
-from .forms import LoginFrom, RegForm
 from user.models import Teacher, ReadNum, Profile
 from Apprenticeship.models import ApprenticeRequest
 

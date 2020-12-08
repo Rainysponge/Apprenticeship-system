@@ -44,6 +44,7 @@
             </div>
 
             <div class="col-md-8">
+                    <div id="sevenDayReadNum" style="width: 600px;height:400px;"></div>
                     <h3 class="commet-area-title" style="border-bottom: 1px solid #ccc;padding-bottom: 0.4em">经历以及获奖记录</h3>
                     <p aligin="left">
                     {% autoescape off %}
@@ -53,6 +54,7 @@
                     {% endautoescape %}</p>
 
                     <button type="button" class="btn btn-primary" href="#">修改师傅您的信息</button>
+
             </div>
 <!-- {#            <div class="col-md-4">#}
 {#                <div class="card border-secondary mb-3" style="max-width: 30rem;">#}
@@ -95,30 +97,49 @@
         </div>
     </div>
     <script>
-        const test = window.location.href;
-        const e = test.split('/');
-        const l = e.length;
 
-        // {#console.log('{{ user.Profile.photo_resize_url }}');#}
-        //console.log(e);
-        //console.log(l);
-        //console.log(e[5]);
+        console.log("{{ dates|safe }}");
+        console.log('{{ get_7_readNum }}');
+        var sevenDayReadNumChart = echarts.init(document.getElementById('sevenDayReadNum'));
 
-        if ({{ user.teacher.pk }} == e[5]){
-            console.log("TRUE");
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '7日内访问量'
+            },
+            tooltip: {},
+            legend: {
+                data:['访问量']
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ dates|safe }}
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: {{ get_7_readNum|safe }},
+                type: 'line',
+                symbol: 'triangle',
+                symbolSize: 20,
+                lineStyle: {
+                    color: 'green',
+                    width: 4,
+                    type: 'dashed'
+                },
+                itemStyle: {
+                    borderWidth: 3,
+                    borderColor: 'green',
+                    color: 'white'
+                }
+            }]
+        };
 
-        }else{
-            console.log("False");
-            console.log({{ user.teacher.pk }});
-            alert("这是别人的de私人信息哦~");
+        // 使用刚指定的配置项和数据显示图表。
+        sevenDayReadNumChart.setOption(option);
 
-        function JumpToHome()
-        {
-            window.location.href="{% url 'home' %}";
-        }
 
-        setTimeout(JumpToHome, 0);
-        }
 
     </script>
 

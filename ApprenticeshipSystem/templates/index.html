@@ -62,17 +62,21 @@
         {% for readnum in hot_read_nums %}
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-              <img src="{{ readnum.user.Profile.photo_resize_url }}" class="card-img-top" height="247" width="148" alt="...">
+              <img src="{{ readnum.teacher.user.Profile.photo_resize_url }}" class="card-img-top" height="247" width="148" alt="...">
               <div class="card-body">
                     <p class="card-text">
-                        {{ readnum.teacher.teacher_name }}:
+                        <div style="text-align: center">{{ readnum.teacher.teacher_name }}</div>
                   <hr>
                         {% autoescape off %}
                             擅长：{{ readnum.teacher.skill }}
                         {% endautoescape %}
 
                     </p>
-                    <button href="{% url 'teacher_info_outside' readnum.user.pk %}" class="btn btn-info btn-lg btn-block">看看主页</button>
+                    <button class="btn btn-info btn-lg btn-block">
+                        <a href="{% url 'teacher_info_outside' readnum.teacher.user.pk %}" style="color: white">
+                            看看主页
+                        </a>
+                    </button>
               </div>
             </div>
           </div>

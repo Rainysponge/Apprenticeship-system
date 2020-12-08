@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js" integrity="sha256-l2MbFZa/DPaDeHSfMIRbcg5x1GwNX1LaeTEl93+r6VU=" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
@@ -83,7 +83,7 @@ footer{
 
             </ul>
             <ul class="nav navbar-nav">
-            {% if not user.is_authenticated %}
+            {% if not user.is_authenticated or not user %}
                     <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
                     </li>
@@ -99,7 +99,7 @@ footer{
                             {% block Active %}{% endblock %}
 
                             <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>
-                            <a class="dropdown-item" href="{% url 'teacher_info' user.teacher.pk %}">个人中心</a>
+                            <a class="dropdown-item" href="{% url 'teacher_info' %}">个人中心</a>
                             
                             <a class="dropdown-item" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>
                             {% if user.is_staff %}

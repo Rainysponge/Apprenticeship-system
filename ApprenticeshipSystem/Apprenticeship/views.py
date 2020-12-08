@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.urls import reverse
@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from comment.forms import CommentForm, Teacher_CommentForm
 from comment.models import Comment, Teacher_Comment
 from user.models import Teacher, ReadNum, Student
+from user.utils import read_statistics_once_read, get_seven_days_read_data
 from .forms import ApprenticeForm
 from .models import Homework, ApprenticeRequest, Relationship
 
@@ -48,26 +49,32 @@ def homework_detail(request):
 
 
 def teacher_info_outside(request, user_pk):
+    if request.user:
+        user = request.user
+    else:
+        user = ''
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
-    user = get_object_or_404(User, pk=user_pk)
-    teacher = Teacher.objects.get(user=user)    # 被评论的对象
+    user_t = get_object_or_404(User, pk=user_pk)
+    teacher = Teacher.objects.get(user=user_t)    # 被评论的对象
     comments = Teacher_Comment.objects.filter(content_object=teacher)
 
-    if ReadNum.objects.filter(user=user).count():
-        readnum = ReadNum.objects.get(user=user)
-    else:
-        readnum = ReadNum(teacher=teacher, user=user)
-    readnum.read_num += 1
-    readnum.save()
+    read_cookie_key = read_statistics_once_read(request, teacher)
 
     data = {'teacher_id': teacher.id}
     context = {}
     context['comments'] = comments
     context['teacher_comment_form'] = Teacher_CommentForm(initial=data)
-    context['user_out'] = user
-    context['teacher'] = user.teacher
-    return render(request, 'Apprenticeship/teacher_info_outside.html', context)
+    context['user_out'] = user_t
+    context['teacher'] = user_t.teacher
+    context['user'] = user
+    # context['dates'] = dates
+    # context['read_num_seven_days'] = read_num_seven_days
+    context['key'] = read_cookie_key
+    # return render(request, 'Apprenticeship/teacher_info_outside.html', context)
+    response = render_to_response('Apprenticeship/teacher_info_outside.html', context)  # 响应
+    response.set_cookie(read_cookie_key, 'true')  # 阅读cookie标记
+    return response
 
 
 

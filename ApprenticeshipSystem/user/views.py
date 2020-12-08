@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile, Teacher, Student, ReadNum, Major
+from .utils import get_seven_days_read_data
 from .forms import RegForm, LoginFrom, changeProfileInfoForm, changePortrait
 
 
@@ -75,11 +76,16 @@ def logout(request):
 
 
 # 这个之后要做成个人中心 要加入个人学生的信息
-def teacher_info(request, teacher_pk):
-    teacher = get_object_or_404(Teacher, pk=teacher_pk)
+def teacher_info(request):
 
+    user = request.user
+    teacher = get_object_or_404(Teacher, user=user)
+    dates, get_7_readNum = get_seven_days_read_data(teacher)
     context = {}
     context['teacher'] = teacher
+    context['dates'] = dates
+    context['get_7_readNum'] = get_7_readNum
+
     return render(request, 'user/teacher_info.html', context)
 
 

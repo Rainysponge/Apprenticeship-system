@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils import timezone
 from .tools import user_directory_path
 
 
@@ -29,6 +30,7 @@ class Profile(models.Model):
     school = models.CharField(max_length=10, default='华东理工大学')
     sex = models.CharField(max_length=2, null=True)
     grade = models.CharField(max_length=5)
+
     major = models.ForeignKey(Major, on_delete=models.DO_NOTHING, null=True)
     photo_resize = ImageSpecField(  # 注意：ImageSpecField 不会生成数据库表的字段
         source='portrait',
@@ -104,7 +106,7 @@ class Student(models.Model):
 class ReadNum(models.Model):
     read_num = models.IntegerField(default=0)
     teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
+    # user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         if self.read_num:
@@ -132,3 +134,9 @@ def get_Profile(self):
 User.get_school = get_school
 
 User.Profile = get_Profile
+
+
+class ReadDetail(models.Model):
+    date = models.DateField(default=timezone.now)
+    read_num = models.IntegerField(default=0)
+    teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
