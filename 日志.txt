@@ -165,3 +165,7 @@ auth：胡展翊
 20_12_08
 现在可以在个人页面查看自己老师主页的七日内访问量了，样式可以再做调整。在index.html里加入了{% if not user.is_auxxx  (and user) %},以解决在teacher_info_outside里，登录用户似乎没登陆的问题，但可能存在其他BUG！
 auth:胡展翊
+
+20_12_09
+增加了对应修改老师、学生基础信息的页面
+auth：吴一楠

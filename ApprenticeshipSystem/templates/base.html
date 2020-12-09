@@ -99,6 +99,11 @@ footer{
                             {% block Active %}{% endblock %}
 
                             <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>
+
+                            <a class="dropdown-item" href="{% url 'changeTSInfo' user.Profile.pk %}">修改老师基本信息</a>
+
+                            <a class="dropdown-item" href="{% url 'changeTS_student_Info' user.Profile.pk %}">修改学生基本信息</a>
+
                             <a class="dropdown-item" href="{% url 'teacher_info' %}">个人中心</a>
                             
                             <a class="dropdown-item" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>

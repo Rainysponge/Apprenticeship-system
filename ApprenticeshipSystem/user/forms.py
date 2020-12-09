@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile, Major
+from ckeditor.widgets import CKEditorWidget
 
 
 class LoginFrom(forms.Form):
@@ -123,7 +124,34 @@ class changePortrait(forms.Form):
     portrait = forms.ImageField(label='头像', help_text='不能超过5M!')
 
 
+# class changeTeacherInfoForm(forms.Form):
+#     skill = forms.CharField(label='学校',
+#                             max_length=30, min_length=2,
+#                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))
+
+
 class changeTeacherInfoForm(forms.Form):
-    skill = forms.CharField(label='学校',
-                            max_length=30, min_length=2,
-                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '不要输入克莱登大学哦~'}))
+    teacher_name = forms.CharField(label='教师姓名',
+                             max_length=30, min_length=2,
+                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
+    skill = forms.CharField(label='技能',
+                                   max_length=30, min_length=2,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '展示你的才艺'}))
+    self_introduction = forms.CharField(label='自我介绍',
+                                   max_length=30, min_length=2,
+                                   widget=CKEditorWidget(config_name='Info_ckeditor'))
+
+
+class changeStudentInfoForm(forms.Form):
+    student_name = forms.CharField(label='学生姓名',
+                             max_length=30, min_length=2,
+                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
+    help = forms.CharField(label='需求',
+                                   max_length=30, min_length=2,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '诉说你的需求'}))
+    self_introduction = forms.CharField(label='自我介绍',
+                                   max_length=30, min_length=2,
+                                   widget=CKEditorWidget(config_name='student_Info_ckeditor'))
+
+
+

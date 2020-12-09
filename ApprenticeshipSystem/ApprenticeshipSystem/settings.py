@@ -157,6 +157,38 @@ CKEDITOR_CONFIGS = {
         
         'removePlugins': 'elementspath',
         'resize_enabled': False,
+    },
+
+    'Info_ckeditor': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ["TextColor", "BGColor", 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ["Smiley", "SpecialChar", 'Blockquote'],
+        ],
+        'width': '350',
+        'height': '180',
+
+        'removePlugins': 'elementspath',
+        'resize_enabled': False,
+    },
+
+    'student_Info_ckeditor': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ["TextColor", "BGColor", 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ["Smiley", "SpecialChar", 'Blockquote'],
+        ],
+        'width': '350',
+        'height': '180',
+
+        'removePlugins': 'elementspath',
+        'resize_enabled': False,
     }
 }
 

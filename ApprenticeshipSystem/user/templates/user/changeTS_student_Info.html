@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}{{ form_title }}{% endblock %}
+{% load staticfiles %}
+
+{% block header_extends %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    {% if user.Profile.pk %}
+    <div class="container">
+        <div class="row">
+                <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
+                        <p>{{ user.Profile.nickname }}</p>
+                            <form enctype="multipart/form-data" action="{% url 'changeTSInfo' user.Profile.pk %}" method="POST">
+                                {% csrf_token %}
+                                {% autoescape off %}
+
+                                {% for field in change_student_form %}
+                                    <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
+                                    {{ field }}
+                                    <p class="text-danger">{{ field.errors.as_text }}</p>
+                                {% endfor %}
+
+                                {% endautoescape %}
+                                <span class="pull-left text-danger">{{ change_form.non_field_errors }}</span>
+                                <button type="submit" class="btn btn-info">修改</button>
+                            </form>
+
+
+                </div>
+        </div>
+    </div>
+
+    {% else %}
+        <script>
+            alert("好像还没登录呢！\n请先登录哦~");
+
+        function JumpToHome()
+        {
+            window.location.href="{% url 'login' %}";
+        }
+
+        setTimeout(JumpToHome,1000);
+        </script>
+
+    {% endif %}
+
+    <script>
+        var test = window.location.href;
+        var e = test.split('/');
+        var l = e.length;
+
+        if ({{ user.Profile.pk }} == e[5]){
+            console.log("%12*jsnfhjk&&8jjn*");
+
+        }else{
+            console.log("0sj2**2%76pp)");
+            alert("请不要修改别人的信息哦~");
+
+            function JumpToHome()
+            {
+                window.location.href="{% url 'home' %}";
+            }
+
+            setTimeout(JumpToHome,1000);
+        }
+
+    </script>
+
+{% endblock content %}
