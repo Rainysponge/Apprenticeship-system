@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from comment.forms import CommentForm, Teacher_CommentForm
 from comment.models import Comment, Teacher_Comment
-from user.models import Teacher, ReadNum, Student
+from user.models import Teacher, ReadNum, Student, Major, Profile
 from user.utils import read_statistics_once_read, get_seven_days_read_data
 from .forms import ApprenticeForm
 from .models import Homework, ApprenticeRequest, Relationship
@@ -17,6 +17,7 @@ from .models import Homework, ApprenticeRequest, Relationship
 def teacher_list(request):
     Teacher_list = Teacher.objects.all()
     users = User.objects.all()
+    major_list = Major.objects.all()
     # profile = Profile.objects.all()
     # type_users = type(users)
     paginator = Paginator(users, 5)  # 每10页进行分页
@@ -25,12 +26,40 @@ def teacher_list(request):
 
     context = {}
     context['teacher_list'] = Teacher_list
+    context['major_list'] = major_list
     context['users'] = users
     # context['type_users'] = type_users
     context['page_of_teachers'] = page_of_teachers
     # context['profile'] = profile
 
     return render(request, 'Apprenticeship/teacher_list.html', context)
+
+
+def teacher_major(request, major_pk):
+    major = Major.objects.get(pk=major_pk)
+    profile_list = Profile.objects.filter(major=major)
+    major_list = Major.objects.all()
+
+
+    # profile = Profile.objects.all()
+    # type_users = type(users)
+    paginator = Paginator(profile_list, 5)  # 每10页进行分页
+    page_num = request.GET.get('page', 1)
+    page_of_teachers = paginator.get_page(page_num)
+
+    context = {}
+    context['major_list'] = major_list
+    context['profile_list'] = profile_list
+    # context['major_list'] = major_list
+    # context['users'] = users
+    # context['type_users'] = type_users
+    context['page_of_teachers'] = page_of_teachers
+    # context['profile'] = profile
+
+    return render(request, 'Apprenticeship/teacher_major.html', context)
+
+
+
 
 
 def homework_detail(request):

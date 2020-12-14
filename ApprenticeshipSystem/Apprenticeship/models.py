@@ -7,8 +7,6 @@ from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
-
-
 class Relationship(models.Model):
     SID = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
     TID = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)

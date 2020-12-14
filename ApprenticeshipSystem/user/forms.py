@@ -132,26 +132,23 @@ class changePortrait(forms.Form):
 
 class changeTeacherInfoForm(forms.Form):
     teacher_name = forms.CharField(label='教师姓名',
-                             max_length=30, min_length=2,
-                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
+                                   max_length=30, min_length=2,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
     skill = forms.CharField(label='技能',
-                                   max_length=30, min_length=2,
-                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '展示你的才艺'}))
+                            max_length=30, min_length=2,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '擅长'}))
     self_introduction = forms.CharField(label='自我介绍',
-                                   max_length=30, min_length=2,
-                                   widget=CKEditorWidget(config_name='Info_ckeditor'))
+                                        max_length=400, min_length=2,
+                                        widget=CKEditorWidget(config_name='Info_ckeditor'))
 
 
 class changeStudentInfoForm(forms.Form):
     student_name = forms.CharField(label='学生姓名',
-                             max_length=30, min_length=2,
-                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
+                                   max_length=30, min_length=2,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '输入你的新名字吧~'}))
     help = forms.CharField(label='需求',
-                                   max_length=30, min_length=2,
-                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '诉说你的需求'}))
+                           max_length=30, min_length=2,
+                           widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '诉说你的需求'}))
     self_introduction = forms.CharField(label='自我介绍',
-                                   max_length=30, min_length=2,
-                                   widget=CKEditorWidget(config_name='student_Info_ckeditor'))
-
-
-
+                                        max_length=400, min_length=2,
+                                        widget=CKEditorWidget(config_name='student_Info_ckeditor'))

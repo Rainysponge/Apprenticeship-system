@@ -14,7 +14,7 @@
         <div class="row">
                 <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
                         <p>{{ user.Profile.nickname }}</p>
-                            <form enctype="multipart/form-data" action="{% url 'changeTSInfo' user.Profile.pk %}" method="POST">
+                            <form enctype="multipart/form-data" action="{% url 'changeTS_student_Info' user.Profile.pk %}" method="POST">
                                 {% csrf_token %}
                                 {% autoescape off %}
 

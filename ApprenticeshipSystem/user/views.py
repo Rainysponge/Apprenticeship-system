@@ -5,7 +5,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile, Teacher, Student, ReadNum, Major
 from .utils import get_seven_days_read_data
-from .forms import RegForm, LoginFrom, changeProfileInfoForm, changePortrait, changeTeacherInfoForm, changeStudentInfoForm
+from .forms import RegForm, LoginFrom, changeProfileInfoForm, changePortrait, changeTeacherInfoForm, \
+    changeStudentInfoForm
 
 
 # Create your views here.
@@ -77,7 +78,6 @@ def logout(request):
 
 # 这个之后要做成个人中心 要加入个人学生的信息
 def teacher_info(request):
-
     user = request.user
     teacher = get_object_or_404(Teacher, user=user)
     dates, get_7_readNum = get_seven_days_read_data(teacher)
@@ -124,12 +124,12 @@ def changeProfileInfo(request, profile_pk):
 
 def changeTSInfo(request, profile_pk):
     change_form = changeTeacherInfoForm(request.POST)
-    change_student_form = changeStudentInfoForm(request.POST)
+    # change_student_form = changeStudentInfoForm(request.POST)
     if request.method == 'POST':
 
         profile = Profile.objects.get(pk=profile_pk)
         teacher = Teacher.objects.get(user=profile.user)
-        student = Student.objects.get(user=profile.user)
+        # student = Student.objects.get(user=profile.user)
         if change_form.is_valid():
             # profile = Profile.objects.get(pk=profile_pk)
             teacher.teacher_name = change_form.cleaned_data['teacher_name']
@@ -138,48 +138,29 @@ def changeTSInfo(request, profile_pk):
             teacher.self_introduction = change_form.cleaned_data['self_introduction']
 
             teacher.save()
-            context = {'massage': '基础信息已经更改', 'a': 1}
+            context = {'massage': '老师信息已经更改'}
             return render(request, 'index.html', context)
 
-        if change_student_form.is_valid():
-            student.student_name = change_student_form.cleaned_data['student_name']
-            student.help = change_student_form.cleaned_data['help']
-            # profile.portrait = request.FILES['portrait']
-            student.self_introduction = change_student_form.cleaned_data['self_introduction']
-
-            student.save()
-            context = {'massage': '基础信息已经更改', 'a': 1}
-            return render(request, 'index.html', context)
     else:
         change_form = changeTeacherInfoForm()
-        change_student_form = changeStudentInfoForm()
+        # change_student_form = changeStudentInfoForm()
 
     context = {}
     context['change_form'] = change_form
     context['form_title'] = '更改老师学生基本信息'
-    context['change_student_form'] = change_student_form
+    # context['change_student_form'] = change_student_form
     # context['ruser'] = str(request.user.username)
     return render(request, 'user/changeTSInfo.html', context)
 
 
 def changeTS_student_Info(request, profile_pk):
-    change_form = changeTeacherInfoForm(request.POST)
+    # change_form = changeStudentInfoForm(request.POST)
     change_student_form = changeStudentInfoForm(request.POST)
     if request.method == 'POST':
 
         profile = Profile.objects.get(pk=profile_pk)
-        teacher = Teacher.objects.get(user=profile.user)
+        # teacher = Teacher.objects.get(user=profile.user)
         student = Student.objects.get(user=profile.user)
-        if change_form.is_valid():
-            # profile = Profile.objects.get(pk=profile_pk)
-            teacher.teacher_name = change_form.cleaned_data['teacher_name']
-            teacher.skill = change_form.cleaned_data['skill']
-            # profile.portrait = request.FILES['portrait']
-            teacher.self_introduction = change_form.cleaned_data['self_introduction']
-
-            teacher.save()
-            context = {'massage': '基础信息已经更改', 'a': 1}
-            return render(request, 'index.html', context)
 
         if change_student_form.is_valid():
             student.student_name = change_student_form.cleaned_data['student_name']
@@ -188,15 +169,15 @@ def changeTS_student_Info(request, profile_pk):
             student.self_introduction = change_student_form.cleaned_data['self_introduction']
 
             student.save()
-            context = {'massage': '基础信息已经更改', 'a': 1}
+            context = {'massage': '学生信息已经更改'}
             return render(request, 'index.html', context)
     else:
-        change_form = changeTeacherInfoForm()
+        # change_form = changeTeacherInfoForm()
         change_student_form = changeStudentInfoForm()
 
     context = {}
-    context['change_form'] = change_form
-    context['form_title'] = '更改老师学生基本信息'
+    # context['change_form'] = change_form
+    context['form_title'] = '更改学生基本信息'
     context['change_student_form'] = change_student_form
     # context['ruser'] = str(request.user.username)
     return render(request, 'user/changeTS_student_Info.html', context)
