@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}作业列表{% endblock %}
+{% block homeworkActive %}active{% endblock %}
 {% block content %}
 <nav class="nav mb-4" style="padding:1rem ;background-color:white">
     <div class=" col-1"></div>
@@ -35,7 +36,7 @@ $("#homework").append('<div class="col mb-4">'+'<div class="card">'+
     '<p class="card-text">截止时间：</p>'+
     '<p class="card-text">作业状态：</p>'+
     '<p class="card-text">发布时间：</p>'+
-    '<a class="btn btn-primary " href="#" role="button" style="background:darkseagreen;width: 100px">提交</a>'+
+    '<a class="btn btn-primary " href="{% url "homework_detail" %}" role="button" style="background:darkseagreen;width: 100px">提交</a>'+
     '</div>' +
     '</div>' +
     '</div>'
