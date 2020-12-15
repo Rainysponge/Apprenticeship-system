@@ -40,7 +40,6 @@ def teacher_major(request, major_pk):
     profile_list = Profile.objects.filter(major=major)
     major_list = Major.objects.all()
 
-
     # profile = Profile.objects.all()
     # type_users = type(users)
     paginator = Paginator(profile_list, 5)  # 每10页进行分页
@@ -57,9 +56,6 @@ def teacher_major(request, major_pk):
     # context['profile'] = profile
 
     return render(request, 'Apprenticeship/teacher_major.html', context)
-
-
-
 
 
 def homework_detail(request):
@@ -85,7 +81,7 @@ def teacher_info_outside(request, user_pk):
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
     user_t = get_object_or_404(User, pk=user_pk)
-    teacher = Teacher.objects.get(user=user_t)    # 被评论的对象
+    teacher = Teacher.objects.get(user=user_t)  # 被评论的对象
     comments = Teacher_Comment.objects.filter(content_object=teacher)
 
     read_cookie_key = read_statistics_once_read(request, teacher)
@@ -106,12 +102,11 @@ def teacher_info_outside(request, user_pk):
     return response
 
 
-
 def student_info_outside(request, user_pk):
     # user_outside = User.objects.filter(pk=user_pk).first()
     # teacher = Teacher.objects.filter(pk=user_pk)    用这个获取为什么是错的？
     user = get_object_or_404(User, pk=user_pk)
-    student = Student.objects.get(user=user)    # 被评论的对象
+    student = Student.objects.get(user=user)  # 被评论的对象
     teacherList = ApprenticeRequest.objects.filter(user=user)
     context = {}
     # context['comments'] = comments
@@ -131,17 +126,35 @@ def Apprentice_request(request, teacher_pk):
     teacher = Teacher.objects.get(pk=teacher_pk)
     # if request.user.is_authenticated():
     user = request.user
-    if ApprenticeRequest.objects.filter(teacher=teacher, user=user, result=0).count() == 0:
-    # teacher = Teacher.objects.get(pk=teacher_pk)
-    # user = request.user
+    if ApprenticeRequest.objects.filter(teacher=teacher, user=user).count() == 0:
+        # teacher = Teacher.objects.get(pk=teacher_pk)
+        # user = request.user
         apprentice_request = ApprenticeRequest()
         apprentice_request.user = user
         apprentice_request.teacher = teacher
         apprentice_request.result = 0
         apprentice_request.save()
     else:
-        pass
-        
+        Teacher_list = Teacher.objects.all()
+        users = User.objects.all()
+        major_list = Major.objects.all()
+        # profile = Profile.objects.all()
+        # type_users = type(users)
+        paginator = Paginator(users, 5)  # 每10页进行分页
+        page_num = request.GET.get('page', 1)
+        page_of_teachers = paginator.get_page(page_num)
+
+        context = {}
+        context['teacher_list'] = Teacher_list
+        context['major_list'] = major_list
+        context['users'] = users
+        context['massage'] = '你已经给他发过请求了，请耐心等待！'
+        # context['type_users'] = type_users
+        context['page_of_teachers'] = page_of_teachers
+        # context['profile'] = profile
+
+        return render(request, 'Apprenticeship/teacher_list.html', context)
+
     referer = request.META.get('HTTP_REFERER', reverse('home'))
     return redirect(referer)
 
@@ -155,7 +168,7 @@ def Apprentice_detail(request):
     response_list = ApprenticeRequest.objects.filter(user=user)
     # waiting_response = ApprenticeRequest.objects.filter(user=user, result=0)
     # isRefused_response = ApprenticeRequest.objects.filter(user=user, result=2)
-    
+
     # my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
 
     context = {}
@@ -171,11 +184,11 @@ def Apprentice_detail(request):
 
 # def Apprentice_response(request):
 #     user = request.user
-    
+
 #     success_response = ApprenticeRequest.objects.filter(user=user, result=1)
 #     waiting_response = ApprenticeRequest.objects.filter(user=user, result=0)
 #     isRefused_response = ApprenticeRequest.objects.filter(user=user, result=2)
-    
+
 #     # my_students_requests = ApprenticeRequest.objects.filter(teacher=teacher, result=1)
 
 #     context = {}
@@ -184,9 +197,6 @@ def Apprentice_detail(request):
 #     context['isRefused_response'] = isRefused_response
 
 #     return render(request, 'Apprenticeship/ApprenticeResponse.html', context)
-
-
-
 
 
 def Apprentice_agree(request, requirement_pk):

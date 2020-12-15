@@ -142,9 +142,10 @@ context['teacher'] = user.teacher -->
     
 
 <script>
-    function apprenticeRequire(){
-        alert('请求已经发送！');
+    if('{{ massage }}'){
+        alert('{{ massage }}');
     }
+
 
     console.log('{{ user }}');
     console.log('{{ key }}');
